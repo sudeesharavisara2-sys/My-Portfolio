@@ -93,15 +93,7 @@ export default function Hero({ data }) {
         </FadeIn>
       </div>
 
-      <div style={{
-        position: 'absolute', bottom: '2rem', left: '50%', transform: 'translateX(-50%)',
-        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6,
-        color: 'var(--muted)', fontSize: '0.75rem', letterSpacing: '0.08em',
-        animation: 'float 2.5s ease-in-out infinite',
-      }}>
-        <div style={{ width: 1, height: 40, background: 'linear-gradient(to bottom, var(--gold), transparent)' }} />
-        <span>scroll</span>
-      </div>
+      
 
       <style>{`
         @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }

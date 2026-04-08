@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 
 const links = ['About', 'Skills', 'Projects', 'Experience', 'Contact'];
 
-export default function Navbar({ name }) {
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const initials = name ? name.split(' ').map(w => w[0]).join('') : 'SR';
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -20,10 +19,11 @@ export default function Navbar({ name }) {
       borderBottom: '1px solid var(--border)',
       transition: 'background 0.3s',
     }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 2rem', display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 60 }}>
-        <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.2rem', color: 'var(--gold)', letterSpacing: '0.04em' }}>
-          {initials}.
-        </span>
+      <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 2rem', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', height: 60 }}>
+        
+        {/* 'SR' කොටස සම්පූර්ණයෙන්ම ඉවත් කර ඇත. 
+            එම නිසා links ටික දකුණු පැත්තට (flex-end) පෙළගස්වා ඇත. */}
+
         <ul style={{ display: 'flex', gap: '2rem', listStyle: 'none' }}>
           {links.map(l => (
             <li key={l}>
