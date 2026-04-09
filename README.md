@@ -1,6 +1,6 @@
 # Sudeesha Ravisara — Portfolio
 
-A personal portfolio website built with **React** (frontend) + **Node.js / Express** (backend).
+A personal portfolio website built with **React** (frontend) + **Node.js / Express** (backend)..
 
 ## Project Structure
 
