@@ -3,12 +3,21 @@ import SectionHeader from './SectionHeader';
 import FadeIn from './FadeIn';
 
 export default function About({ data }) {
-  const initials = data?.name ? data.name.split(' ').map(w => w[0]).join('') : 'Sudeesha';
+ 
+
+  const customStats = [
+    { number: "2nd", label: "Year Undergraduate" },
+    { number: "3+", label: "Full-stack projects" },
+    { number: "1+", label: "Year work experience" },
+    { number: "10+", label: "Technologies learned" }
+  ];
 
   return (
     <section id="about" style={{ padding: '6rem 2rem', background: 'var(--navy2)' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
+          
+          {/* Left Column: Text Content */}
           <div>
             <FadeIn delay={0}>
               <SectionHeader label="About Me" title={"Passionate about\nbuilding things"} />
@@ -25,33 +34,52 @@ export default function About({ data }) {
             </FadeIn>
             <FadeIn delay={250}>
               <p style={{ color: 'var(--muted)', fontWeight: 300 }}>
-                Strong analytical thinking and debugging skills, with practical data-handling experience gained from a corporate environment at DAMRO Group.
+                Strong analytical thinking and debugging skills, with practical data-handling experience gained from a corporate environment.
               </p>
             </FadeIn>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginTop: '2rem' }}>
-              {(data?.stats || []).map((s, i) => (
-                <FadeIn key={i} delay={300 + i * 80}>
-                  <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 10, padding: '1.2rem 1.5rem' }}>
-                    <div style={{ fontFamily: "'Playfair Display', serif", fontSize: '2rem', color: 'var(--gold)', fontWeight: 600 }}>{s.number}</div>
-                    <div style={{ fontSize: '0.82rem', color: 'var(--muted)', marginTop: 2 }}>{s.label}</div>
+          </div>
+
+          {/* Right Column: New Stats Grid (Replacing SR Box) */}
+          <FadeIn delay={150} from="right">
+            <div style={{ 
+              display: 'grid', 
+              gridTemplateColumns: '1fr 1fr', 
+              gap: '1.5rem' 
+            }}>
+              {customStats.map((s, i) => (
+                <div 
+                  key={i} 
+                  style={{ 
+                    background: 'var(--card)', 
+                    border: '1px solid var(--border)', 
+                    borderRadius: 16, 
+                    padding: '2rem 1.5rem',
+                    textAlign: 'center',
+                    transition: 'transform 0.3s ease'
+                  }}
+                >
+                  <div style={{ 
+                    fontFamily: "'Playfair Display', serif", 
+                    fontSize: '2.2rem', 
+                    color: 'var(--gold)', 
+                    fontWeight: 600 
+                  }}>
+                    {s.number}
                   </div>
-                </FadeIn>
+                  <div style={{ 
+                    fontSize: '0.85rem', 
+                    color: 'var(--muted)', 
+                    marginTop: 8,
+                    textTransform: 'uppercase',
+                    letterSpacing: '1px'
+                  }}>
+                    {s.label}
+                  </div>
+                </div>
               ))}
             </div>
-          </div>
-          <FadeIn delay={150} from="right">
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <div style={{
-                width: 280, height: 320, background: 'var(--navy3)',
-                border: '2px solid var(--border)', borderRadius: 16,
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                position: 'relative', overflow: 'hidden',
-              }}>
-                <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, height: '40%', background: 'linear-gradient(to top, rgba(201,168,76,0.08), transparent)' }} />
-                <span style={{ fontFamily: "'Playfair Display', serif", fontSize: '5rem', color: 'var(--gold)', opacity: 0.6 }}>{initials}</span>
-              </div>
-            </div>
           </FadeIn>
+
         </div>
       </div>
     </section>

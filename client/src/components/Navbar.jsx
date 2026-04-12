@@ -21,8 +21,7 @@ export default function Navbar() {
     }}>
       <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 2rem', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', height: 60 }}>
         
-        {/* 'SR' කොටස සම්පූර්ණයෙන්ම ඉවත් කර ඇත. 
-            එම නිසා links ටික දකුණු පැත්තට (flex-end) පෙළගස්වා ඇත. */}
+      
 
         <ul style={{ display: 'flex', gap: '2rem', listStyle: 'none' }}>
           {links.map(l => (
