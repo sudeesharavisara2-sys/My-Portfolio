@@ -95,12 +95,12 @@ app.get("/api/portfolio", (req, res) => {
         role: "BSc (Hons) in Software Engineering",
         org: "NSBM Green University",
         description:
-          "Second-year undergraduate studying core software engineering subjects including algorithms, databases, software design, REST APIs, and full-stack development. Applying academic knowledge through hands-on web application projects.",
+          "Second year undergraduate studying core software engineering subjects including algorithms, databases, software design, REST APIs, and full stack development. Applying academic knowledge through hands on web application projects.",
       },
       {
         period: "Mar 2024 — 2025",
         role: "Payroll Clerk",
-        org: "DAMRO Group, Nittambuwa",
+        org: "DAMRO Group - Nittambuwa",
         description:
           "Processing employee payroll and attendance records with high data accuracy. Generating analytical reports using Excel and internal payroll systems. Assisting with recruitment, onboarding, and maintaining confidential employee records.",
       },
@@ -109,7 +109,7 @@ app.get("/api/portfolio", (req, res) => {
         role: "Python for Beginners",
         org: "University of Moratuwa & DP Education",
         description:
-          "Completed a Python programming course covering fundamentals of programming, problem-solving, and scripting — strengthening the foundation for backend and data-related development work.",
+          "Completed a Python programming course covering fundamentals of programming, problem solving, and scripting strengthening the foundation for backend and data-related development work.",
       },
       {
         period: "2020 — 2022",
