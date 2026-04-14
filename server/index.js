@@ -27,7 +27,7 @@ app.get("/api/portfolio", (req, res) => {
       "Second-year Software Engineering undergraduate at NSBM Green University seeking a Internship. Experienced in developing responsive web applications using Java, Spring Boot, and React with REST API integration and MySQL databases. Strong analytical thinking, debugging skills, and practical data-handling experience gained from a corporate environment.",
     stats: [
       { number: "2nd", label: "Year undergraduate" },
-      { number: "3+", label: "Full-stack projects" },
+      { number: "4+", label: "Full-stack projects" },
       { number: "1+", label: "Year work experience" },
       { number: "10+", label: "Technologies learned" },
     ],
@@ -66,28 +66,32 @@ app.get("/api/portfolio", (req, res) => {
     projects: [
       {
         number: "01",
-        title: "Full-Stack Web Application",
-        description:
-          "Developed a responsive web application using React for the frontend and Spring Boot for the backend. Designed RESTful APIs for efficient client-server communication and implemented relational database schemas with CRUD operations in MySQL.",
-        tags: ["React", "Spring Boot", "MySQL", "REST API"],
-        github: "https://github.com/sudeesharavisara2-sys",
+        title: "NextStep - University Management",
+        description: "A comprehensive student service platform developed for NSBM. It features a React-based frontend and Spring Boot backend, facilitating shuttle tracking, room bookings, and resource management.",
+        tags: ["React", "Spring Boot", "MySQL", "State Management"],
+        github: "https://github.com/sudeesharavisara2-sys/nextstep-frontend",
       },
       {
         number: "02",
-        title: "REST API Development",
-        description:
-          "Designed and implemented robust REST APIs for client-server communication. Tested all endpoints using Postman, debugged application-level errors, and managed source code with Git for version control.",
-        tags: ["Java", "Spring Boot", "Postman", "Git"],
-        github: "https://github.com/sudeesharavisara2-sys",
+        title: "SpareHubLK - Vehicle Parts E-Commerce",
+        description: "A specialized e-commerce platform developed using PHP to bridge the gap between vehicle part suppliers and owners. Features a custom-built database schema to manage diverse inventory.",
+        tags: ["PHP", "MySQL", "JavaScript", "E-Commerce"],
+        github: "https://github.com/sudeesharavisara2-sys/sparehublk",
       },
       {
         number: "03",
-        title: "Database-Driven Application",
-        description:
-          "Created relational database schemas and performed CRUD operations using MySQL. Built a data-driven application with a focus on data accuracy, integrity, and reporting — skills reinforced by real-world payroll experience.",
-        tags: ["MySQL", "Java", "CRUD", "Database Design"],
-        github: "https://github.com/sudeesharavisara2-sys",
+        title: "Student Hub Portal",
+        description: "An interactive web portal designed to centralize student activities and information. Built with a focus on responsive design and seamless navigation.",
+        tags: ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+        github: "https://github.com/sudeesharavisara2-sys/nsbm_student_hub",
       },
+      {
+        number: "04",
+        title: "University Management Module",
+        description: "A backend-focused project dealing with academic data structures and university workflow automation. Highlights experience in structuring relational databases.",
+        tags: ["Java", "SQL", "Database Design", "Backend Development"],
+        github: "https://github.com/sudeesharavisara2-sys/university",
+      }
     ],
     experience: [
       {
@@ -136,24 +140,11 @@ app.post("/api/contact", async (req, res) => {
   console.log(`   Subject: ${subject}`);
   console.log(`   Message: ${message}\n`);
 
-  // ── To enable real email sending, uncomment and configure this: ──
-  //
-  // const transporter = nodemailer.createTransport({
-  //   service: "gmail",
-  //   auth: { user: "your@gmail.com", pass: "your-app-password" },
-  // });
-  // await transporter.sendMail({
-  //   from: email,
-  //   to: "sudeesha@email.com",
-  //   subject: `Portfolio Contact: ${subject}`,
-  //   text: `From: ${name}\nEmail: ${email}\n\n${message}`,
-  // });
-
   res.json({ success: true, message: "Message received! I'll be in touch soon." });
 });
 
 app.listen(PORT, () => {
   console.log(`\n🚀 Portfolio server running at http://localhost:${PORT}`);
   console.log(`   Health: http://localhost:${PORT}/api/health`);
-  console.log(`   Data:   http://localhost:${PORT}/api/portfolio\n`);
+  console.log(`   Data:    http://localhost:${PORT}/api/portfolio\n`);
 });
