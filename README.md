@@ -1,89 +1,133 @@
-# Sudeesha Ravisara — Portfolio
+# 🌟 Sudeesha Ravisara — Personal Portfolio
 
-A personal portfolio website built with **React** (frontend) + **Node.js / Express** (backend).
+A personal portfolio website built with **React** (frontend) and **Node.js / Express** (backend), showcasing my projects, skills, and experience as a Full-Stack Developer.
 
-## Project Structure
+---
+
+
+
+## ✨ Features
+
+- **Typewriter hero animation** — rotating roles with a blinking cursor
+- **Smooth fade-in animations** — scroll-triggered entrance effects using a custom `useInView` hook
+- **Auto-playing project slideshows** — image carousels with navigation dots for each project
+- **Functional contact form** — powered by Nodemailer via an Express backend
+- **REST API backend** — serves portfolio data dynamically from a single source of truth
+- **Fully responsive design** — optimized for desktop, tablet, and mobile
+- **Dark theme** — elegant navy & gold color palette
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer     | Technology                          |
+|-----------|--------------------------------------|
+| Frontend  | React 18, CSS-in-JS                  |
+| Backend   | Node.js, Express                     |
+| Email     | Nodemailer                           |
+| Dev Tools | Concurrently, Create React App       |
+
+---
+
+## 📁 Project Structure
 
 ```
-portfolio/
-├── client/          # React frontend
-│   ├── public/
+My-Portfolio/
+├── client/                  # React frontend
+│   ├── public/              # Static assets (images, profile photo)
+│   │   └── projects/        # Project screenshot images
 │   └── src/
-│       ├── components/
-│       │   ├── Navbar.jsx
+│       ├── components/      # UI components
 │       │   ├── Hero.jsx
 │       │   ├── About.jsx
 │       │   ├── Skills.jsx
 │       │   ├── Projects.jsx
 │       │   ├── Experience.jsx
 │       │   ├── Contact.jsx
-│       │   └── Footer.jsx
-│       ├── App.jsx
-│       ├── index.js
-│       └── index.css
-├── server/          # Node.js backend
-│   ├── index.js
-│   └── package.json
-├── package.json     # Root scripts
+│       │   ├── Navbar.jsx
+│       │   ├── Footer.jsx
+│       │   ├── FadeIn.jsx
+│       │   └── SectionHeader.jsx
+│       └── hooks/           # Custom React hooks
+│           ├── useInView.js
+│           └── useTypewriter.js
+├── server/                  # Express backend
+│   └── index.js             # API routes + Nodemailer contact handler
+├── package.json             # Root scripts (runs both client & server)
 └── README.md
 ```
 
-## Quick Start
+---
 
-### 1. Install all dependencies
+## 🧩 Sections
+
+- **Hero** — Name, animated role titles, and call-to-action buttons
+- **About** — Background summary with stat highlights
+- **Skills** — Categorized skills with animated progress bars
+- **Projects** — Featured projects with auto-playing image slideshows
+- **Experience & Education** — Timeline of work and academic background
+- **Contact** — Email form that sends messages via Nodemailer
+
+---
+
+## ⚙️ Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) v16+
+- npm
+
+### Installation
+
 ```bash
+# 1. Clone the repository
+git clone https://github.com/sudeesharavisara2-sys/My-Portfolio.git
+cd My-Portfolio
+
+# 2. Install all dependencies (root + client + server)
 npm run install:all
 ```
 
-### 2. Run both frontend & backend together
+### Running Locally
+
 ```bash
+# Run both client and server concurrently
 npm run dev
 ```
 
-- React app → http://localhost:3000
-- Node.js API → http://localhost:5000
+| Service  | URL                     |
+|----------|-------------------------|
+| Frontend | http://localhost:3000   |
+| Backend  | http://localhost:5000   |
 
-## Customise Your Portfolio
+### Build for Production
 
-All your personal data lives in **`server/index.js`** inside the `/api/portfolio` route.
-Edit the following fields to make it yours:
-
-| Field | Description |
-|---|---|
-| `name` | Your full name |
-| `title` | Your role/title |
-| `email` | Your contact email |
-| `github` | Your GitHub profile URL |
-| `linkedin` | Your LinkedIn profile URL |
-| `about` | Your bio paragraph |
-| `stats` | 4 stat cards (number + label) |
-| `skills` | Skill categories with proficiency 0–100 |
-| `projects` | Your projects (title, description, tags, github link) |
-| `experience` | Education & work timeline |
-
-## Enable Real Email (Contact Form)
-
-In `server/index.js`, uncomment the nodemailer block and add your Gmail credentials:
-
-```js
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: { user: 'your@gmail.com', pass: 'your-app-password' },
-});
-```
-
-> Use a Gmail **App Password** (not your regular password).
-> Generate one at: Google Account → Security → 2-Step Verification → App Passwords
-
-## Deploy for Free
-
-### Frontend (Vercel / Netlify)
 ```bash
-cd client && npm run build
+cd client
+npm run build
 ```
-Upload the `build/` folder to [Netlify](https://netlify.com) or [Vercel](https://vercel.com).
 
-### Backend (Railway / Render)
-Push the `server/` folder to [Railway](https://railway.app) or [Render](https://render.com) — both have free tiers.
+## 🗂️ Featured Projects
 
-Update the React proxy in `client/package.json` to point to your deployed server URL.
+| # | Project | Tech Stack |
+|---|---------|------------|
+| 01 | **NextStep** — University Management Platform | React, Spring Boot, MySQL |
+| 02 | **SpareHubLK** — Vehicle Parts E-Commerce | PHP, MySQL, JavaScript |
+| 03 | **Student Hub Portal** | HTML5, CSS3, JavaScript |
+| 04 | **University Management Module** | Java, SQL |
+
+---
+
+## 📬 Contact
+
+**Sudeesha Ravisara**  
+📧 sudeesharavisara2@gmail.com  
+🔗 [LinkedIn](https://linkedin.com/in/sudeesha-ravisara-073741274)  
+🐙 [GitHub](https://github.com/sudeesharavisara2-sys)  
+📍 Nittambuwa, Sri Lanka
+
+---
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
