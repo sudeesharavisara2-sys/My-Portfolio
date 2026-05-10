@@ -1,0 +1,15 @@
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Environment variables ( passwords / API keys)
+.env
+
+# Build outputs
+build/
+dist/
+
+# Operating system files
+.DS_Store
+Thumbs.db

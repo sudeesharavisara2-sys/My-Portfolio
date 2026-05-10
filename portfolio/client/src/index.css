@@ -1,0 +1,50 @@
+/* Reset default browser styles */
+*, *::before, *::after { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+/* Global Variables - Black & Green Theme */
+:root {
+  /* Dark Background Shades */
+  --navy:   #0a0a0a;       /* Main background (Pure Black) */
+  --navy2:  #121212;       /* Secondary background for sections */
+  --navy3:  #1a1a1a;       /* Lighter black for borders or accents */
+  
+  /* Green Accent Colors (Neon/Emerald Style) */
+  --gold:   #10b981;       /* Primary brand color (Green) */
+  --gold2:  #34d399;       /* Lighter green for hover states */
+  
+  /* Typography Colors */
+  --text:   #f0fdf4;       /* High-contrast text (Off-white with green tint) */
+  --muted:  #94a3b8;       /* Dimmed text for descriptions/subtitles */
+  
+  /* UI Element Styles */
+  --border: rgba(16, 185, 129, 0.2); /* Semi-transparent green border */
+  --card:   rgba(25, 25, 25, 0.8);   /* Background for cards and modals */
+}
+
+/* Enable smooth scrolling for anchor links */
+html { scroll-behavior: smooth; }
+
+/* Global Body Styles */
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--navy);
+  color: var(--text);
+  line-height: 1.7;
+  overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
+}
+
+/* General Link Styling */
+a { 
+  color: inherit; 
+  text-decoration: none; 
+}
+
+/* Selection Highlight Color */
+::selection { 
+  background: var(--gold); 
+  color: var(--navy); 
+}
