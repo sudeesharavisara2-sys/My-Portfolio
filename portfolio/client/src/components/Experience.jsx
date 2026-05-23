@@ -23,7 +23,7 @@ const experience = [
   },
   {
     period: "2025 — Present",
-    role: "BSc (Hons) in Software Engineering",
+    role: "BSc (Hons) in Software Engineering | Undergraduate",
     org: "NSBM Green University",
     description:
       "Second year undergraduate studying core software engineering subjects including algorithms, databases, software design, REST APIs, and full stack development. Applying academic knowledge through hands on web application projects.",
