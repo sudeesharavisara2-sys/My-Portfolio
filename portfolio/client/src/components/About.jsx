@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import SectionHeader from './SectionHeader';
 import FadeIn from './FadeIn';
 
 export default function About({ data }) {
- 
+  // State to track if the screen is mobile-sized
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Sets to true if screen width is 768px or less (standard tablet/mobile breakpoint)
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    // Check screen size on initial load
+    handleResize(); 
+    
+    // Add event listener to handle screen resizing dynamically
+    window.addEventListener('resize', handleResize);
+    
+    // Clean up the event listener when component unmounts
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const customStats = [
     { number: "2nd", label: "Year Undergraduate" },
@@ -13,9 +30,21 @@ export default function About({ data }) {
   ];
 
   return (
-    <section id="about" style={{ padding: '6rem 2rem', background: 'var(--navy2)' }}>
+    // Adjusted padding for mobile screens to look cleaner
+    <section id="about" style={{ padding: isMobile ? '4rem 1rem' : '6rem 2rem', background: 'var(--navy2)' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', alignItems: 'center' }}>
+        
+        {/* 
+          Main Layout Grid: 
+          - Mobile: Stacked vertically (1 column)
+          - Desktop: Side-by-side (2 columns)
+        */}
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', 
+          gap: isMobile ? '2.5rem' : '4rem', 
+          alignItems: 'center' 
+        }}>
           
           {/* Left Column: Text Content */}
           <div>
@@ -39,11 +68,15 @@ export default function About({ data }) {
             </FadeIn>
           </div>
 
-          {/* Right Column: New Stats Grid (Replacing SR Box) */}
-          <FadeIn delay={150} from="right">
+          {/* 
+            Right Column: Stats Grid
+            - Changed 'from' direction to 'bottom' on mobile to prevent unwanted horizontal page stretching.
+          */}
+          <FadeIn delay={150} from={isMobile ? "bottom" : "right"}> 
             <div style={{ 
               display: 'grid', 
-              gridTemplateColumns: '1fr 1fr', 
+              // Cards layout: 1 column on mobile to prevent text overlapping, 2 columns on desktop
+              gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', 
               gap: '1.5rem' 
             }}>
               {customStats.map((s, i) => (
@@ -53,14 +86,16 @@ export default function About({ data }) {
                     background: 'var(--card)', 
                     border: '1px solid var(--border)', 
                     borderRadius: 16, 
-                    padding: '2rem 1.5rem',
+                    // Reduced padding for mobile so cards don't take too much vertical space
+                    padding: isMobile ? '1.5rem 1rem' : '2rem 1.5rem', 
                     textAlign: 'center',
                     transition: 'transform 0.3s ease'
                   }}
                 >
                   <div style={{ 
                     fontFamily: "'Playfair Display', serif", 
-                    fontSize: '2.2rem', 
+                    // Slightly scaled down the font size for smaller mobile screens
+                    fontSize: isMobile ? '1.8rem' : '2.2rem', 
                     color: 'var(--gold)', 
                     fontWeight: 600 
                   }}>

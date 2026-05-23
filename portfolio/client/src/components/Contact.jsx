@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SectionHeader from './SectionHeader';
 import FadeIn from './FadeIn';
 
@@ -57,6 +57,19 @@ export default function Contact({ data }) {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [status, setStatus] = useState(null); // null | 'sending' | 'success' | 'error'
 
+  // State to track if screen size matches mobile responsive breakpoints
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    
+    handleResize(); // Initialize width checks on component mount
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
 
   const handleSubmit = async () => {
@@ -90,7 +103,10 @@ export default function Contact({ data }) {
   };
 
   return (
-    <section id="contact" style={{ padding: '6rem 2rem', background: 'var(--navy2)' }}>
+    <section id="contact" style={{ 
+      padding: isMobile ? '4rem 1.5rem' : '6rem 2rem', 
+      background: 'var(--navy2)' 
+    }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
         {/* Animate Header */}
         <FadeIn from="bottom">
@@ -99,41 +115,58 @@ export default function Contact({ data }) {
 
         <div style={{ 
           display: 'grid', 
-          gridTemplateColumns: '1fr 1.4fr', 
-          gap: '4rem', 
+          // Drop layout grid columns into a singular stack structure automatically on mobile
+          gridTemplateColumns: isMobile ? '1fr' : '1fr 1.4fr', 
+          gap: isMobile ? '2.5rem' : '4rem', 
           alignItems: 'start',
           marginTop: '3rem' 
         }}>
 
           {/* Left Column: Contact Info - Animates from Left */}
-          <FadeIn from="left" delay={100}>
+          <FadeIn from={isMobile ? "bottom" : "left"} delay={100}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <p style={{ color: 'var(--muted)', fontWeight: 300, lineHeight: 1.7 }}>
+              <p style={{ 
+                color: 'var(--muted)', 
+                fontWeight: 300, 
+                lineHeight: 1.7,
+                textAlign: isMobile ? 'center' : 'left' 
+              }}>
                 I'm open to internship opportunities, collaborations, and interesting projects.
                 Feel free to reach out — I'll get back to you as soon as I can.
               </p>
               
-              {[
-                { icon: '✉', label: 'Email', value: data?.email || 'sudeesharavisara2@email.com' },
-                { icon: '📍', label: 'Location', value: data?.location || 'Nittambuwa, Sri Lanka' },
-                { icon: '🕐', label: 'Availability', value: 'Open to internships' },
-              ].map(({ icon, label, value }) => (
-                <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-                  <div style={{
-                    width: 40, height: 40, borderRadius: 8, background: 'var(--card)',
-                    border: '1px solid var(--border)', display: 'flex', alignItems: 'center',
-                    justifyContent: 'center', fontSize: 16, flexShrink: 0,
-                  }}>{icon}</div>
-                  <div>
-                    <div style={{ fontSize: '0.75rem', color: 'var(--muted)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 2 }}>{label}</div>
-                    <div style={{ fontSize: '0.92rem', color: 'var(--text)' }}>{value}</div>
+              <div style={{ 
+                display: 'flex', 
+                flexDirection: 'column', 
+                gap: '1.5rem',
+                alignItems: isMobile ? 'center' : 'flex-start'
+              }}>
+                {[
+                  { icon: '✉', label: 'Email', value: data?.email || 'sudeesharavisara2@email.com' },
+                  { icon: '📍', label: 'Location', value: data?.location || 'Nittambuwa, Sri Lanka' },
+                  { icon: '🕐', label: 'Availability', value: 'Open to internships' },
+                ].map(({ icon, label, value }) => (
+                  <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 14, width: isMobile ? '100%' : 'auto', maxWidth: 320 }}>
+                    <div style={{
+                      width: 40, height: 40, borderRadius: 8, background: 'var(--card)',
+                      border: '1px solid var(--border)', display: 'flex', alignItems: 'center',
+                      justifyContent: 'center', fontSize: 16, flexShrink: 0,
+                    }}>{icon}</div>
+                    <div>
+                      <div style={{ fontSize: '0.75rem', color: 'var(--muted)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 2 }}>{label}</div>
+                      <div style={{ fontSize: '0.92rem', color: 'var(--text)' }}>{value}</div>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
 
-              <div>
+              <div style={{ textAlign: isMobile ? 'center' : 'left' }}>
                 <div style={{ fontSize: '0.75rem', color: 'var(--muted)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 10 }}>Find me on</div>
-                <div style={{ display: 'flex', gap: 10 }}>
+                <div style={{ 
+                  display: 'flex', 
+                  gap: 10,
+                  justifyContent: isMobile ? 'center' : 'flex-start' 
+                }}>
                   {[{ label: 'GitHub', href: data?.github || '#' }, { label: 'LinkedIn', href: data?.linkedin || '#' }].map(({ label, href }) => (
                     <a key={label} href={href} target="_blank" rel="noreferrer"
                       style={{
@@ -151,9 +184,19 @@ export default function Contact({ data }) {
           </FadeIn>
 
           {/* Right Column: Contact Form - Animates from Right with slight delay */}
-          <FadeIn from="right" delay={300}>
-            <div style={{ background: 'var(--card)', border: '1px solid var(--border)', borderRadius: 14, padding: '2rem' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+          <FadeIn from={isMobile ? "bottom" : "right"} delay={300}>
+            <div style={{ 
+              background: 'var(--card)', 
+              border: '1px solid var(--border)', 
+              borderRadius: 14, 
+              padding: isMobile ? '1.5rem' : '2rem' 
+            }}>
+              {/* Stack Name and Email fields vertically on mobile screen form rows */}
+              <div style={{ 
+                display: 'grid', 
+                gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', 
+                gap: isMobile ? '0rem' : '1rem' 
+              }}>
                 <Input label="Your name" name="name" type="text" placeholder="Jane Smith" value={form.name} onChange={handleChange} />
                 <Input label="Email address" name="email" type="email" placeholder="jane@example.com" value={form.email} onChange={handleChange} />
               </div>
