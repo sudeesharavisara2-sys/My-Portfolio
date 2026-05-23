@@ -66,10 +66,16 @@ export default function Contact({ data }) {
     }
     setStatus('sending');
     try {
-      const res = await fetch('/api/contact', {
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({
+          access_key: '290df105-3f3c-4c64-a210-db7bbc0af7b7',
+          name: form.name,
+          email: form.email,
+          subject: form.subject,
+          message: form.message,
+        }),
       });
       const result = await res.json();
       if (result.success) {
@@ -108,8 +114,8 @@ export default function Contact({ data }) {
               </p>
               
               {[
-                { icon: '✉', label: 'Email', value: data?.email || 'sudeesha@email.com' },
-                { icon: '📍', label: 'Location', value: data?.location || 'Colombo, Sri Lanka' },
+                { icon: '✉', label: 'Email', value: data?.email || 'sudeesharavisara2@email.com' },
+                { icon: '📍', label: 'Location', value: data?.location || 'Nittambuwa, Sri Lanka' },
                 { icon: '🕐', label: 'Availability', value: 'Open to internships' },
               ].map(({ icon, label, value }) => (
                 <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 14 }}>

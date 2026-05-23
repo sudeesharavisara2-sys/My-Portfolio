@@ -3,6 +3,39 @@ import SectionHeader from './SectionHeader';
 import FadeIn from './FadeIn';
 import useInView from '../hooks/useInView';
 
+const skills = [
+  {
+    category: "Languages",
+    items: [
+      { name: "Java", level: 70 },
+      { name: "JavaScript", level: 70 },
+      { name: "Python", level: 80 },
+      { name: "PHP", level: 70 },
+      { name: "SQL", level: 80 },
+    ],
+  },
+  {
+    category: "Frontend & Backend",
+    items: [
+      { name: "React", level: 75 },
+      { name: "Spring Boot", level: 70 },
+      { name: "HTML5 & CSS3", level: 85 },
+      { name: "Bootstrap", level: 75 },
+      { name: "REST API Development", level: 70 },
+    ],
+  },
+  {
+    category: "Tools & Databases",
+    items: [
+      { name: "MySQL", level: 80 },
+      { name: "Git & GitHub", level: 75 },
+      { name: "Postman", level: 75 },
+      { name: "VS Code / IntelliJ", level: 80 },
+      { name: "Microsoft Excel", level: 85 },
+    ],
+  },
+];
+
 function AnimatedBar({ level }) {
   const [ref, inView] = useInView();
   return (
@@ -35,7 +68,7 @@ function SkillCard({ category, items, delay }) {
   );
 }
 
-export default function Skills({ data }) {
+export default function Skills() {
   return (
     <section id="skills" style={{ padding: '6rem 2rem', background: 'var(--navy)' }}>
       <div style={{ maxWidth: 1100, margin: '0 auto' }}>
@@ -43,7 +76,7 @@ export default function Skills({ data }) {
           <SectionHeader label="What I know" title="Skills & Technologies" />
         </FadeIn>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem' }}>
-          {(data?.skills || []).map((cat, i) => (
+          {skills.map((cat, i) => (
             <SkillCard key={i} category={cat.category} items={cat.items} delay={i * 120} />
           ))}
         </div>

@@ -29,7 +29,7 @@ function ProjectSlideshow({ images }) {
       position: 'relative',
       background: '#000000', // Solid black background to blend with image edges and hide borders
       border: '1px solid var(--border)',
-      boxShadow: '0 10px 30px -15px rgba(2,12,27,0.7)'
+      boxShadow: '0 10px 30px -15px rgba(0,0,0,0.7)'
     }}>
       {images.map((img, index) => (
         <img
@@ -65,6 +65,7 @@ function ProjectSlideshow({ images }) {
               width: i === currentIndex ? '20px' : '8px',
               height: '8px',
               borderRadius: '4px',
+              // 🔄 Uses your CSS theme variable for the active green dot indicator
               background: i === currentIndex ? 'var(--gold)' : 'rgba(255,255,255,0.3)',
               transition: 'all 0.3s ease'
             }} />
@@ -93,7 +94,8 @@ function ProjectRow({ number, title, description, tags, github, images }) {
           <div style={{ 
             fontFamily: "'Playfair Display', serif", 
             fontSize: '3.5rem', 
-            color: 'rgba(201,168,76,0.12)', 
+            // 🔄 Swapped out old transparent gold for a sleek, faded background green token tint
+            color: 'var(--border)', 
             fontWeight: 700, 
             lineHeight: 1, 
             marginBottom: '0.5rem' 
@@ -117,8 +119,12 @@ function ProjectRow({ number, title, description, tags, github, images }) {
             {tags.map((t, i) => (
               <span key={i} style={{
                 fontSize: '0.75rem', fontWeight: 500,
-                background: 'rgba(201,168,76,0.08)', color: 'var(--gold)',
-                border: '1px solid rgba(201,168,76,0.25)', padding: '5px 12px', borderRadius: '4px',
+                // 🔄 Cleared absolute colors; styles now read clean structural parameters from your theme variables
+                background: 'rgba(16, 185, 129, 0.06)', 
+                color: 'var(--gold)',
+                border: '1px solid var(--border)', 
+                padding: '5px 12px', 
+                borderRadius: '4px',
               }}>{t}</span>
             ))}
           </div>
@@ -126,7 +132,15 @@ function ProjectRow({ number, title, description, tags, github, images }) {
           {/* GitHub Repository Link */}
           {github && (
             <a href={github} target="_blank" rel="noreferrer"
-              style={{ fontSize: '0.9rem', color: 'var(--gold)', display: 'inline-flex', alignItems: 'center', gap: 8, textDecoration: 'none', fontWeight: 600 }}>
+              style={{ 
+                fontSize: '0.9rem', 
+                color: 'var(--gold)', 
+                display: 'inline-flex', 
+                alignItems: 'center', 
+                gap: 8, 
+                textDecoration: 'none', 
+                fontWeight: 600 
+              }}>
               ↗ View on GitHub
             </a>
           )}
