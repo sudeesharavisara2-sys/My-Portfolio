@@ -3,9 +3,8 @@ import useTypewriter from '../hooks/useTypewriter';
 import FadeIn from './FadeIn';
 
 const roles = [
-  'Full-Stack Developer',
-  'React & Spring Boot Dev',
   'Software Engineering Undergrad',
+  'React & Spring Boot Dev',
   'REST API Builder',
 ];
 
@@ -31,17 +30,38 @@ export default function Hero({ data }) {
       display: 'flex', 
       alignItems: 'center',
       // Dynamic padding: top padding expands on mobile to clear fixed navbars safely
-      padding: isMobile ? '120px 1.5rem 4rem' : '80px 2rem 0', 
+      padding: isMobile ? '120px 1.5rem 6rem' : '80px 2rem 0', 
       position: 'relative', 
       overflow: 'hidden',
     }}>
+      {/* Glow effect */}
       <div style={{
         position: 'absolute', top: -200, right: -200, width: 600, height: 600,
         background: 'radial-gradient(circle, rgba(201,168,76,0.07) 0%, transparent 70%)',
         pointerEvents: 'none',
+        zIndex: 1,
       }} />
 
-      <div style={{ maxWidth: 1100, margin: '0 auto', width: '100%' }}>
+      {/* ─── BACKGROUND WATERMARK TEXT ─── */}
+      <div style={{
+        position: 'absolute',
+        left: '50%',
+        top: isMobile ? '45%' : '50%',
+        transform: 'translate(-50%, -50%)',
+        fontSize: isMobile ? '18vw' : '14vw', 
+        fontWeight: 800,
+        letterSpacing: '0.05em',
+        color: 'rgba(255, 255, 255, 0.04)', // Minimal faint opacity
+        textTransform: 'uppercase',
+        userSelect: 'none',
+        pointerEvents: 'none', 
+        zIndex: 0,
+        whiteSpace: 'nowrap'
+      }}>
+        PORTFOLIO
+      </div>
+
+      <div style={{ maxWidth: 1100, margin: '0 auto', width: '100%', position: 'relative', zIndex: 2 }}>
         <div style={{ 
           display: 'grid', 
           // Collapse from 2 columns to a single column on mobile viewports
@@ -100,8 +120,7 @@ export default function Hero({ data }) {
                 marginLeft: isMobile ? 'auto' : '0',
                 marginRight: isMobile ? 'auto' : '0'
               }}>
-                Experienced in building responsive web apps with Java, Spring Boot, and React.
-                Currently at NSBM Green University, seeking a Full-Stack Developer Internship.
+                Software Engineering undergraduate at NSBM Green University, passionate about building real-world solutions through clean, purposeful code.
               </p>
             </FadeIn>
 
@@ -175,8 +194,54 @@ export default function Hero({ data }) {
         </div>
       </div>
 
+      {/* ─── SCROLL DOWN INDICATOR ─── */}
+      {!isMobile && (
+        <div style={{
+          position: 'absolute',
+          bottom: '2.5rem',
+          left: '2rem',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '0.75rem',
+          zIndex: 3
+        }}>
+          <span style={{ 
+            fontSize: '0.7rem', 
+            textTransform: 'uppercase', 
+            letterSpacing: '0.15em', 
+            color: 'var(--muted)',
+            fontWeight: 500
+          }}>
+            Scroll Down
+          </span>
+          <div style={{ 
+            width: '40px', 
+            height: '1px', 
+            background: 'rgba(255,255,255,0.15)', 
+            position: 'relative',
+            overflow: 'hidden'
+          }}>
+            <div style={{
+              position: 'absolute',
+              left: 0,
+              top: 0,
+              height: '100%',
+              width: '50%',
+              background: 'var(--gold)',
+              animation: 'scrollLineMove 2s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+            }} />
+          </div>
+        </div>
+      )}
+
+      {/* Embedded Animations */}
       <style>{`
         @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+        @keyframes scrollLineMove {
+          0% { transform: translateX(-100%); }
+          50% { transform: translateX(200%); }
+          100% { transform: translateX(-100%); }
+        }
       `}</style>
     </section>
   );

@@ -5,28 +5,34 @@
   box-sizing: border-box; 
 }
 
-/* Global Variables - Black & Green Theme */
+/* Global Variables - Premium Black & Emerald Green Theme */
 :root {
   /* Dark Background Shades */
   --navy:   #0a0a0a;       /* Main background (Pure Black) */
-  --navy2:  #121212;       /* Secondary background for sections */
-  --navy3:  #1a1a1a;       /* Lighter black for borders or accents */
+  --navy2:  #121212;       /* Secondary background for cards/sections */
+  --navy3:  #1a1a1a;       /* Lighter black for subtle borders/accents */
   
   /* Green Accent Colors (Neon/Emerald Style) */
-  --gold:   #10b981;       /* Primary brand color (Green) */
-  --gold2:  #34d399;       /* Lighter green for hover states */
+  --gold:   #10b981;       /* Kept for backwards compatibility with your React components (Emerald) */
+  --green:  #10b981;       /* Primary brand accent color */
+  --green-hover: #34d399; /* Lighter emerald for hover states */
   
   /* Typography Colors */
-  --text:   #f0fdf4;       /* High-contrast text (Off-white with green tint) */
-  --muted:  #94a3b8;       /* Dimmed text for descriptions/subtitles */
+  --text:   #f0fdf4;       /* High-contrast text (Off-white with a fresh mint tint) */
+  --muted:  #94a3b8;       /* Dimmed slate text for secondary text/subtitles */
   
   /* UI Element Styles */
-  --border: rgba(16, 185, 129, 0.2); /* Semi-transparent green border */
-  --card:   rgba(25, 25, 25, 0.8);   /* Background for cards and modals */
+  --border: rgba(16, 185, 129, 0.15); /* Soft, semi-transparent emerald border */
+  --card:   rgba(18, 18, 18, 0.95);   /* Solid premium black card body background */
 }
 
-/* Enable smooth scrolling for anchor links */
-html { scroll-behavior: smooth; }
+/* Enable smooth scrolling and crisp typography adjustments */
+html { 
+  scroll-behavior: smooth; 
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 
 /* Global Body Styles */
 body {
@@ -34,17 +40,18 @@ body {
   background: var(--navy);
   color: var(--text);
   line-height: 1.7;
-  overflow-x: hidden; /* Prevents unwanted horizontal scrolling */
+  overflow-x: hidden; /* Prevents layout breakouts and unwanted horizontal scrolling */
 }
 
-/* General Link Styling */
+/* General Link Styling with a smooth layout transition base */
 a { 
   color: inherit; 
   text-decoration: none; 
+  transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
 }
 
 /* Selection Highlight Color */
 ::selection { 
-  background: var(--gold); 
+  background: var(--green); 
   color: var(--navy); 
 }

@@ -70,7 +70,7 @@ export default function About({ data }) {
             </FadeIn>
             <FadeIn delay={100}>
               <p style={{ color: 'var(--muted)', marginBottom: '1rem', fontWeight: 300 }}>
-                {data?.about || "Second-year Software Engineering undergraduate at NSBM Green University seeking a Full-Stack Developer Internship."}
+                {data?.about || "Software Engineering undergraduate at NSBM Green University, passionate about building real-world solutions through clean code and eager to contribute as an IT intern."}
               </p>
             </FadeIn>
             <FadeIn delay={180}>
