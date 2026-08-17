@@ -30,7 +30,7 @@ export default function About({ data }) {
 
   const customStats = [
     { number: "3rd", label: "Year Undergraduate" },
-    { number: "3+", label: "Full-stack projects" },
+    { number: "3+", label: "Projects" },
     { number: "1+", label: "Year work experience" },
     { number: "10+", label: "Technologies learned" }
   ];
