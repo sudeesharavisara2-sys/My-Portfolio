@@ -241,9 +241,11 @@ export default function Projects() {
         'REST APIs',
         'JWT',
       ],
+      
       github:
         'https://github.com/sudeesharavisara2-sys/Erp_Backend.git',
       liveDemo: 'https://nexaerp-frontend.vercel.app/login',
+      
       images: [
         '/projects/nexaerp1.png',
         '/projects/nexaerp2.png',
@@ -251,6 +253,7 @@ export default function Projects() {
         '/projects/nexaerp4.png',
       ],
     },
+    
 
     {
       number: '02',
