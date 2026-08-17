@@ -79,7 +79,7 @@ export default function Hero({ data }) {
                 letterSpacing: '0.12em', color: 'var(--gold)', textTransform: 'uppercase',
                 border: '1px solid var(--border)', padding: '6px 16px', borderRadius: 20, marginBottom: '1.5rem',
               }}>
-                {data?.title || 'Second-year Software Engineering Undergraduate'}
+                {data?.title || 'Third-year Software Engineering Undergraduate'}
               </span>
             </FadeIn>
 
