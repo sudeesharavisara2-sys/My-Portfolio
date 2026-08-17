@@ -321,6 +321,29 @@ export default function Projects() {
         '/projects/sparehub3.png',
       ],
     },
+
+    {
+    number: '05',
+    title: 'CarPriceLK - Vehicle Price Prediction Platform',
+    description:
+      'A vehicle market value prediction platform built with Python. The system collects and processes vehicle listing data, trains a Random Forest regression model, and provides price predictions through RESTful APIs with a web dashboard.',
+    tags: [
+      'Python',
+      'Flask',
+      'Machine Learning',
+      'MySQL',
+      'REST API',
+      'Web Scraping',
+    ],
+    github:
+      'https://github.com/sudeesharavisara2-sys/CarPriceLK.git',
+    images: [
+      '/projects/carpricelk1.png',
+      '/projects/carpricelk2.png',
+      '/projects/carpricelk3.png',
+      '/projects/carpricelk4.png',
+    ],
+  },
   ];
 
   return (
