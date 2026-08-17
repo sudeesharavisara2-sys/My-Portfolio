@@ -29,7 +29,7 @@ export default function About({ data }) {
   }, []);
 
   const customStats = [
-    { number: "2nd", label: "Year Undergraduate" },
+    { number: "3rd", label: "Year Undergraduate" },
     { number: "3+", label: "Full-stack projects" },
     { number: "1+", label: "Year work experience" },
     { number: "10+", label: "Technologies learned" }
@@ -70,17 +70,17 @@ export default function About({ data }) {
             </FadeIn>
             <FadeIn delay={100}>
               <p style={{ color: 'var(--muted)', marginBottom: '1rem', fontWeight: 300 }}>
-                {data?.about || "Software Engineering undergraduate at NSBM Green University, passionate about building real-world solutions through clean code and eager to contribute as an IT intern."}
+                {data?.about || "Third-Year Software Engineering undergraduate at NSBM Green University, passionate about software development, web technologies, and problem solving."}
               </p>
             </FadeIn>
             <FadeIn delay={180}>
               <p style={{ color: 'var(--muted)', marginBottom: '1rem', fontWeight: 300 }}>
-                Experienced in developing responsive web applications using Java, Spring Boot, and React with REST API integration and MySQL databases.
+                Experienced in Java, Spring Boot, React, ASP.NET Core, PHP, SQL, RESTful APIs, and database development through academic and personal projects.
               </p>
             </FadeIn>
             <FadeIn delay={250}>
               <p style={{ color: 'var(--muted)', marginBottom: '2rem', fontWeight: 300 }}>
-                Strong analytical thinking and debugging skills, with practical data-handling experience gained from a corporate environment.
+                A fast learner with strong analytical, debugging, and teamwork skills, eager to gain industry experience and contribute to real-world IT projects.
               </p>
             </FadeIn>
 
