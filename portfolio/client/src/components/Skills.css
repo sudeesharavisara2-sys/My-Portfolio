@@ -1,0 +1,1338 @@
+/* =========================================================
+   SKILLS SECTION
+   Compact Premium Black + Emerald Theme
+========================================================= */
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.skills-section {
+  position: relative;
+  overflow: hidden;
+
+  min-height: 100vh;
+
+  padding: 88px 28px 95px;
+
+  background:
+    radial-gradient(
+      circle at 43% 55%,
+      rgba(16, 185, 129, 0.09),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 80% 45%,
+      rgba(16, 185, 129, 0.04),
+      transparent 35%
+    ),
+    linear-gradient(
+      180deg,
+      #070908 0%,
+      #070a09 55%,
+      #050706 100%
+    );
+
+  color: var(--text);
+
+  isolation: isolate;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.skills-container {
+  position: relative;
+  z-index: 5;
+
+  width: min(1140px, 100%);
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.skills-heading {
+  max-width: 700px;
+
+  margin: 0 auto 48px;
+
+  text-align: center;
+}
+
+
+.skills-eyebrow {
+  margin: 0 0 8px;
+
+  color: var(--green);
+
+  font-size: 0.72rem;
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+
+  text-transform: uppercase;
+}
+
+
+.skills-title {
+  margin: 0;
+
+  color: var(--text);
+
+  font-size: clamp(
+    2.15rem,
+    4.6vw,
+    3.55rem
+  );
+
+  line-height: 1.04;
+
+  letter-spacing: -0.045em;
+
+  font-weight: 800;
+}
+
+
+.skills-title span {
+  background:
+    linear-gradient(
+      90deg,
+      var(--green),
+      var(--green-hover),
+      #6ee7b7
+    );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  background-clip: text;
+}
+
+
+.skills-subtitle {
+  max-width: 600px;
+
+  margin: 15px auto 0;
+
+  color: var(--muted);
+
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+
+/* =========================================================
+   MAIN SHOWCASE
+========================================================= */
+
+.skills-showcase {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 0.95fr)
+    minmax(0, 1fr);
+
+  gap: 58px;
+
+  align-items: center;
+
+  min-height: 520px;
+}
+
+
+/* =========================================================
+   LEFT COLUMN
+========================================================= */
+
+.skills-left-column {
+  position: relative;
+  z-index: 5;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 24px;
+}
+
+
+.skill-group {
+  position: relative;
+}
+
+
+/* =========================================================
+   GROUP TITLE
+========================================================= */
+
+.skill-group-title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-bottom: 10px;
+
+  color: var(--text);
+
+  font-size: 0.96rem;
+  font-weight: 700;
+}
+
+
+.skill-group-line {
+  width: 4px;
+  height: 20px;
+
+  flex-shrink: 0;
+
+  border-radius: 100px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #a7f3d0,
+      var(--green)
+    );
+
+  box-shadow:
+    0 0 8px rgba(16, 185, 129, 0.9),
+    0 0 18px rgba(16, 185, 129, 0.38);
+}
+
+
+/* =========================================================
+   SKILL PILLS
+========================================================= */
+
+.skill-pill-wrapper {
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  padding-left: 12px;
+}
+
+
+.skill-pill {
+  position: relative;
+
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  min-height: 31px;
+
+  padding: 5px 10px;
+
+  overflow: hidden;
+
+  border:
+    1px solid
+    rgba(16, 185, 129, 0.24);
+
+  border-radius: 8px;
+
+  background:
+    rgba(10, 13, 12, 0.78);
+
+  box-shadow:
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.025);
+
+  backdrop-filter: blur(6px);
+
+  cursor: default;
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background-color 0.25s ease;
+}
+
+
+.skill-pill::before {
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at left center,
+      var(--brand-glow),
+      transparent 75%
+    );
+
+  opacity: 0.11;
+
+  pointer-events: none;
+}
+
+
+.skill-pill:hover {
+  transform:
+    translateY(-2px);
+
+  border-color:
+    var(--brand-color);
+
+  background:
+    rgba(13, 16, 15, 0.95);
+
+  box-shadow:
+    0 5px 18px
+    var(--brand-glow),
+    inset 0 0 12px
+    var(--brand-glow);
+}
+
+
+/* =========================================================
+   PILL ICON
+========================================================= */
+
+.skill-pill-icon {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color:
+    var(--brand-color);
+
+  font-size: 0.87rem;
+
+  filter:
+    drop-shadow(
+      0 0 3px
+      var(--brand-glow)
+    );
+
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
+}
+
+
+.skill-pill:hover
+.skill-pill-icon {
+  transform:
+    scale(1.12);
+
+  filter:
+    drop-shadow(
+      0 0 8px
+      var(--brand-color)
+    );
+}
+
+
+/* =========================================================
+   PILL TEXT
+========================================================= */
+
+.skill-pill-text {
+  position: relative;
+  z-index: 2;
+
+  color: #dce7e2;
+
+  font-size: 0.73rem;
+
+  font-weight: 600;
+
+  line-height: 1;
+
+  transition:
+    color 0.25s ease;
+}
+
+
+.skill-pill:hover
+.skill-pill-text {
+  color:
+    var(--brand-color);
+}
+
+
+/* =========================================================
+   RIGHT TECHNOLOGY PANEL
+========================================================= */
+
+.skills-tech-panel {
+  position: relative;
+  z-index: 6;
+
+  width: 100%;
+
+  min-height: 435px;
+
+  padding: 25px;
+
+  display: flex;
+
+  align-items: center;
+
+  border:
+    1px solid
+    rgba(16, 185, 129, 0.13);
+
+  border-radius: 18px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(14, 19, 17, 0.96),
+      rgba(8, 12, 10, 0.98)
+    );
+
+  box-shadow:
+    0 22px 60px
+    rgba(0, 0, 0, 0.34),
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.02);
+
+  backdrop-filter: blur(12px);
+}
+
+
+.skills-tech-panel::before {
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: inherit;
+
+  background:
+    radial-gradient(
+      circle at 25% 15%,
+      rgba(16, 185, 129, 0.06),
+      transparent 35%
+    );
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   ICON GRID
+========================================================= */
+
+.technology-grid {
+  position: relative;
+  z-index: 3;
+
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  gap: 16px;
+}
+
+
+/* =========================================================
+   TECHNOLOGY CARD
+========================================================= */
+
+.technology-card {
+  position: relative;
+
+  width: 100%;
+
+  max-width: 76px;
+
+  aspect-ratio: 1 / 1;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: visible;
+
+  border:
+    1px solid
+    rgba(148, 163, 184, 0.13);
+
+  border-radius: 11px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #18201e,
+      #111816
+    );
+
+  box-shadow:
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.025),
+    0 6px 16px
+    rgba(0, 0, 0, 0.18);
+
+  cursor: default;
+
+  transition:
+    transform 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease,
+    background 0.28s ease;
+}
+
+
+.technology-card:hover {
+  z-index: 10;
+
+  transform:
+    translateY(-4px)
+    scale(1.05);
+
+  border-color:
+    var(--brand-color);
+
+  background:
+    linear-gradient(
+      145deg,
+      #1c2422,
+      #111816
+    );
+
+  box-shadow:
+    0 8px 23px
+    var(--brand-glow),
+    0 0 12px
+    var(--brand-glow),
+    inset 0 0 14px
+    var(--brand-glow);
+}
+
+
+/* =========================================================
+   TECHNOLOGY ICON
+========================================================= */
+
+.technology-icon {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: #7e8985;
+
+  font-size: clamp(
+    1.75rem,
+    2.3vw,
+    2.45rem
+  );
+
+  opacity: 0.82;
+
+  filter:
+    grayscale(1);
+
+  transition:
+    color 0.3s ease,
+    opacity 0.3s ease,
+    filter 0.3s ease,
+    transform 0.3s ease;
+}
+
+
+.technology-card:hover
+.technology-icon {
+  color:
+    var(--brand-color);
+
+  opacity: 1;
+
+  filter:
+    grayscale(0)
+    drop-shadow(
+      0 0 9px
+      var(--brand-color)
+    );
+
+  transform:
+    scale(1.1);
+}
+
+
+/* =========================================================
+   TOOLTIP
+========================================================= */
+
+.technology-tooltip {
+  position: absolute;
+
+  left: 50%;
+  bottom: -28px;
+
+  z-index: 20;
+
+  transform:
+    translateX(-50%)
+    translateY(-5px);
+
+  padding: 4px 8px;
+
+  border:
+    1px solid
+    var(--brand-color);
+
+  border-radius: 6px;
+
+  background: #090c0b;
+
+  color:
+    var(--brand-color);
+
+  font-size: 0.62rem;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  opacity: 0;
+
+  visibility: hidden;
+
+  pointer-events: none;
+
+  box-shadow:
+    0 5px 15px
+    rgba(0, 0, 0, 0.5);
+
+  transition:
+    opacity 0.2s ease,
+    visibility 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.technology-card:hover
+.technology-tooltip {
+  opacity: 1;
+
+  visibility: visible;
+
+  transform:
+    translateX(-50%)
+    translateY(0);
+}
+
+
+/* =========================================================
+   WIREFRAME
+========================================================= */
+
+.wireframe-wrapper {
+  position: absolute;
+
+  z-index: 2;
+
+  left: 41%;
+  top: 52%;
+
+  width: 270px;
+  height: 270px;
+
+  transform:
+    translate(-50%, -50%);
+
+  pointer-events: none;
+
+  opacity: 0.48;
+}
+
+
+.wireframe-glow {
+  position: absolute;
+
+  inset: 42px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(16, 185, 129, 0.11);
+
+  filter:
+    blur(50px);
+}
+
+
+.wireframe-ring {
+  position: absolute;
+
+  left: 50%;
+  top: 50%;
+
+  width: 170px;
+  height: 170px;
+
+  border:
+    1px solid
+    rgba(16, 185, 129, 0.36);
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 10px
+    rgba(16, 185, 129, 0.08);
+
+  transform-origin: center;
+}
+
+
+.wireframe-ring::before,
+.wireframe-ring::after {
+  content: '';
+
+  position: absolute;
+
+  inset: 12px;
+
+  border:
+    1px solid
+    rgba(16, 185, 129, 0.22);
+
+  border-radius: 50%;
+}
+
+
+.wireframe-ring::after {
+  inset: 25px;
+
+  border-color:
+    rgba(16, 185, 129, 0.18);
+}
+
+
+.wireframe-ring-1 {
+  transform:
+    translate(-50%, -50%)
+    rotateX(68deg)
+    rotateZ(15deg);
+
+  animation:
+    wireframeFloatOne
+    13s linear infinite;
+}
+
+
+.wireframe-ring-2 {
+  transform:
+    translate(-50%, -50%)
+    rotateY(65deg)
+    rotateZ(42deg);
+
+  animation:
+    wireframeFloatTwo
+    15s linear infinite;
+}
+
+
+.wireframe-ring-3 {
+  transform:
+    translate(-50%, -50%)
+    rotateX(55deg)
+    rotateY(45deg)
+    rotateZ(70deg);
+
+  animation:
+    wireframeFloatThree
+    17s linear infinite;
+}
+
+
+.wireframe-ring-4 {
+  width: 200px;
+  height: 105px;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(48deg);
+
+  animation:
+    wireframeFloatFour
+    19s linear infinite;
+}
+
+
+.wireframe-ring-5 {
+  width: 100px;
+  height: 205px;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(-30deg);
+
+  animation:
+    wireframeFloatFive
+    21s linear infinite;
+}
+
+
+.wireframe-ring-6 {
+  width: 215px;
+  height: 76px;
+
+  transform:
+    translate(-50%, -50%)
+    rotate(-55deg);
+
+  animation:
+    wireframeFloatSix
+    23s linear infinite;
+}
+
+
+/* =========================================================
+   WIREFRAME ANIMATIONS
+========================================================= */
+
+@keyframes wireframeFloatOne {
+  0% {
+    transform:
+      translate(-50%, -50%)
+      rotateX(68deg)
+      rotateZ(15deg);
+  }
+
+  100% {
+    transform:
+      translate(-50%, -50%)
+      rotateX(68deg)
+      rotateZ(375deg);
+  }
+}
+
+
+@keyframes wireframeFloatTwo {
+  0% {
+    transform:
+      translate(-50%, -50%)
+      rotateY(65deg)
+      rotateZ(42deg);
+  }
+
+  100% {
+    transform:
+      translate(-50%, -50%)
+      rotateY(65deg)
+      rotateZ(-318deg);
+  }
+}
+
+
+@keyframes wireframeFloatThree {
+  0% {
+    transform:
+      translate(-50%, -50%)
+      rotateX(55deg)
+      rotateY(45deg)
+      rotateZ(70deg);
+  }
+
+  100% {
+    transform:
+      translate(-50%, -50%)
+      rotateX(55deg)
+      rotateY(45deg)
+      rotateZ(430deg);
+  }
+}
+
+
+@keyframes wireframeFloatFour {
+  from {
+    transform:
+      translate(-50%, -50%)
+      rotate(48deg);
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      rotate(408deg);
+  }
+}
+
+
+@keyframes wireframeFloatFive {
+  from {
+    transform:
+      translate(-50%, -50%)
+      rotate(-30deg);
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      rotate(-390deg);
+  }
+}
+
+
+@keyframes wireframeFloatSix {
+  from {
+    transform:
+      translate(-50%, -50%)
+      rotate(-55deg);
+  }
+
+  to {
+    transform:
+      translate(-50%, -50%)
+      rotate(305deg);
+  }
+}
+
+
+/* =========================================================
+   STAR BACKGROUND
+========================================================= */
+
+.skills-stars {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 0;
+
+  opacity: 0.28;
+
+  pointer-events: none;
+
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(52, 211, 153, 0.65) 1px,
+      transparent 1.5px
+    );
+
+  background-size:
+    82px 82px;
+
+  background-position:
+    15px 20px;
+}
+
+
+.skills-stars::before {
+  content: '';
+
+  position: absolute;
+
+  inset: 0;
+
+  background-image:
+    radial-gradient(
+      circle,
+      rgba(16, 185, 129, 0.4) 1px,
+      transparent 1.4px
+    );
+
+  background-size:
+    135px 135px;
+
+  background-position:
+    65px 35px;
+}
+
+
+/* =========================================================
+   FLOOR GRID
+========================================================= */
+
+.skills-floor-grid {
+  position: absolute;
+
+  z-index: 0;
+
+  left: -15%;
+  bottom: -220px;
+
+  width: 130%;
+  height: 500px;
+
+  opacity: 0.08;
+
+  background-image:
+    linear-gradient(
+      rgba(16, 185, 129, 0.45) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(16, 185, 129, 0.45) 1px,
+      transparent 1px
+    );
+
+  background-size:
+    65px 65px;
+
+  transform:
+    perspective(500px)
+    rotateX(62deg);
+
+  transform-origin:
+    center bottom;
+
+  pointer-events: none;
+
+  -webkit-mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 3%,
+      #000 40%,
+      #000
+    );
+
+  mask-image:
+    linear-gradient(
+      to bottom,
+      transparent 3%,
+      #000 40%,
+      #000
+    );
+}
+
+
+/* =========================================================
+   BACKGROUND GLOWS
+========================================================= */
+
+.skills-background-glow {
+  position: absolute;
+
+  z-index: 0;
+
+  border-radius: 50%;
+
+  filter:
+    blur(120px);
+
+  pointer-events: none;
+}
+
+
+.skills-background-glow-1 {
+  width: 340px;
+  height: 340px;
+
+  left: 30%;
+  top: 46%;
+
+  background:
+    rgba(16, 185, 129, 0.08);
+}
+
+
+.skills-background-glow-2 {
+  width: 250px;
+  height: 250px;
+
+  right: 7%;
+  top: 28%;
+
+  background:
+    rgba(52, 211, 153, 0.04);
+}
+
+
+/* =========================================================
+   LARGE TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .skills-showcase {
+    gap: 42px;
+  }
+
+  .wireframe-wrapper {
+    left: 42%;
+
+    width: 230px;
+    height: 230px;
+
+    opacity: 0.32;
+
+    transform:
+      translate(-50%, -50%)
+      scale(0.82);
+  }
+
+  .skills-tech-panel {
+    min-height: 410px;
+    padding: 22px;
+  }
+
+  .technology-grid {
+    gap: 13px;
+  }
+
+  .technology-card {
+    max-width: 70px;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+
+  .skills-section {
+    padding:
+      80px 24px;
+  }
+
+  .skills-showcase {
+    grid-template-columns:
+      1fr;
+
+    gap:
+      48px;
+
+    min-height:
+      unset;
+  }
+
+  .skills-left-column {
+    width: 100%;
+
+    max-width: 720px;
+
+    margin:
+      0 auto;
+  }
+
+  .skills-tech-panel {
+    width: 100%;
+
+    max-width: 560px;
+
+    min-height: auto;
+
+    margin:
+      0 auto;
+
+    padding:
+      24px;
+  }
+
+  .wireframe-wrapper {
+    left: 50%;
+    top: 49%;
+
+    opacity: 0.12;
+
+    transform:
+      translate(-50%, -50%)
+      scale(1);
+  }
+
+  .technology-grid {
+    grid-template-columns:
+      repeat(4, 1fr);
+
+    gap:
+      14px;
+  }
+
+  .technology-card {
+    max-width: 72px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .skills-section {
+    padding:
+      68px 18px;
+  }
+
+  .skills-heading {
+    margin-bottom:
+      38px;
+  }
+
+  .skills-title {
+    font-size:
+      2.1rem;
+  }
+
+  .skills-subtitle {
+    font-size:
+      0.85rem;
+  }
+
+  .skills-left-column {
+    gap:
+      22px;
+  }
+
+  .skill-group-title {
+    font-size:
+      0.92rem;
+  }
+
+  .skill-pill-wrapper {
+    padding-left:
+      0;
+
+    gap:
+      6px;
+  }
+
+  .skill-pill {
+    min-height:
+      29px;
+
+    padding:
+      5px 9px;
+  }
+
+  .skill-pill-icon {
+    font-size:
+      0.82rem;
+  }
+
+  .skill-pill-text {
+    font-size:
+      0.7rem;
+  }
+
+  .skills-tech-panel {
+    max-width:
+      500px;
+
+    padding:
+      18px;
+
+    border-radius:
+      16px;
+  }
+
+  .technology-grid {
+    grid-template-columns:
+      repeat(3, 1fr);
+
+    gap:
+      12px;
+  }
+
+  .technology-card {
+    max-width:
+      70px;
+  }
+
+  .technology-icon {
+    font-size:
+      1.9rem;
+  }
+
+  .wireframe-wrapper {
+    display:
+      none;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 430px) {
+
+  .skills-section {
+    padding:
+      62px 14px;
+  }
+
+  .skills-title {
+    font-size:
+      1.95rem;
+  }
+
+  .technology-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap:
+      12px;
+  }
+
+  .technology-card {
+    max-width:
+      72px;
+  }
+
+  .skills-tech-panel {
+    max-width:
+      330px;
+
+    padding:
+      16px;
+  }
+
+  .technology-icon {
+    font-size:
+      1.9rem;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .wireframe-ring {
+    animation:
+      none;
+  }
+
+  .skill-pill,
+  .technology-card,
+  .skill-pill-icon,
+  .technology-icon {
+    transition:
+      none;
+  }
+}
