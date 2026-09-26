@@ -1,0 +1,478 @@
+/* =========================================================
+   ABOUT SECTION
+========================================================= */
+
+.about-section {
+  position: relative;
+  padding: 120px 32px;
+  background: transparent;
+  overflow: hidden;
+}
+
+.about-container {
+  position: relative;
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+}
+
+.about-layout {
+  display: grid;
+  grid-template-columns:
+    minmax(0, 1.1fr)
+    minmax(0, 0.9fr);
+  align-items: center;
+  gap: clamp(36px, 5vw, 72px);
+}
+
+.about-content,
+.about-stats-column {
+  min-width: 0;
+}
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.about-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 15px;
+  margin-bottom: 24px;
+
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--green-soft);
+
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.06em;
+  color: var(--green-hover);
+}
+
+.about-eyebrow-dot {
+  width: 6px;
+  height: 6px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--green);
+  box-shadow: 0 0 12px var(--green-glow);
+}
+
+.about-title {
+  margin: 0;
+  font-size: clamp(2rem, 3.6vw, 3.2rem);
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: -0.045em;
+  color: var(--text);
+}
+
+.about-title span {
+  color: var(--green);
+}
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.about-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.about-text {
+  max-width: 58ch;
+  margin: 0;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.85;
+  color: var(--muted);
+}
+
+.about-text-lead {
+  font-size: 16px;
+  color: var(--text);
+}
+
+/* =========================================================
+   UPDATED RESUME BUTTON
+========================================================= */
+
+.about-actions {
+  display: flex;
+  align-items: center;
+  margin-top: 32px;
+}
+
+.about-resume-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+
+  min-height: 56px;
+  max-width: 100%;
+  padding: 6px 6px 6px 24px;
+
+  border: 1px solid var(--green-medium);
+  border-radius: 999px;
+  background: var(--navy2);
+  color: var(--text);
+
+  text-decoration: none;
+  box-shadow: 0 6px 18px var(--shadow-dark);
+
+  transition:
+    transform 0.25s ease,
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.about-resume-label {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+}
+
+.about-resume-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+  background: var(--green);
+  color: var(--navy);
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.about-resume-icon svg {
+  width: 19px;
+  height: 19px;
+  transition: transform 0.25s ease;
+}
+
+.about-resume-button:focus-visible {
+  outline: 2px solid var(--green-hover);
+  outline-offset: 5px;
+}
+
+.about-resume-button:active {
+  transform: translateY(1px);
+}
+
+/* =========================================================
+   STAGGERED CARD LAYOUT
+========================================================= */
+
+.about-stats-column {
+  padding-bottom: 24px;
+}
+
+.about-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin: 0;
+}
+
+.about-stat-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  min-width: 0;
+  min-height: 214px;
+  padding: 24px;
+
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: var(--card);
+
+  box-shadow: 0 12px 32px var(--shadow-dark);
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.about-stat-card:nth-child(even) {
+  top: 24px;
+}
+
+.about-stat-card::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--green-medium),
+    transparent
+  );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.about-stat-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  order: 0;
+  width: 100%;
+  margin-bottom: 26px;
+}
+
+.about-stat-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 42px;
+  height: 42px;
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--green-soft);
+  color: var(--green);
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+.about-stat-index {
+  font-family: monospace;
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.about-stat-number {
+  order: 1;
+  margin: 0;
+
+  font-size: clamp(2.4rem, 3.8vw, 3.25rem);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+  letter-spacing: -0.055em;
+  color: var(--text);
+}
+
+.about-stat-label {
+  order: 2;
+  width: 100%;
+  margin-top: 18px;
+  padding-top: 14px;
+
+  border-top: 1px solid var(--border);
+
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--muted);
+}
+
+/* =========================================================
+   HOVER EFFECTS
+========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+  .about-resume-button:hover {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--navy);
+    transform: translateY(-2px);
+
+    box-shadow: 0 10px 26px var(--green-medium);
+  }
+
+  .about-resume-button:hover .about-resume-icon {
+    background: var(--navy);
+    color: var(--green-hover);
+  }
+
+  .about-resume-button:hover .about-resume-icon svg {
+    transform: translateY(2px);
+  }
+
+  .about-stat-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--green-medium);
+
+    box-shadow:
+      0 18px 38px var(--shadow-dark),
+      0 0 24px var(--green-soft);
+  }
+
+  .about-stat-card:hover .about-stat-icon {
+    background: var(--green-medium);
+    color: var(--green-hover);
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 960px) {
+  .about-section {
+    padding: 90px 28px;
+  }
+
+  .about-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 44px;
+  }
+
+  .about-content,
+  .about-stats-column {
+    width: 100%;
+    max-width: 680px;
+  }
+
+  .about-title {
+    font-size: clamp(2rem, 5vw, 3rem);
+  }
+
+  .about-stat-number {
+    font-size: 3rem;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .about-stats-column {
+    padding-bottom: 0;
+  }
+
+  .about-stat-card:nth-child(even) {
+    top: 0;
+  }
+
+  .about-stats-grid {
+    gap: 12px;
+  }
+
+  .about-stat-card {
+    min-height: 200px;
+    padding: 20px 16px;
+    border-radius: 18px;
+  }
+
+  .about-stat-top {
+    margin-bottom: 22px;
+  }
+
+  .about-stat-number {
+    font-size: 2.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-section {
+    padding: 76px 20px;
+  }
+
+  .about-eyebrow {
+    margin-bottom: 20px;
+  }
+
+  .about-title {
+    font-size: clamp(1.8rem, 8vw, 2.3rem);
+    letter-spacing: -0.035em;
+  }
+
+  .about-text {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+
+  .about-text-lead {
+    font-size: 15px;
+  }
+
+  .about-resume-button {
+    gap: 18px;
+    padding-left: 20px;
+    min-height: 54px;
+  }
+
+  .about-resume-label {
+    font-size: 13px;
+  }
+
+  .about-resume-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .about-stat-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+  }
+
+  .about-stat-icon svg {
+    width: 19px;
+    height: 19px;
+  }
+
+  .about-stat-number {
+    font-size: 2.3rem;
+  }
+
+  .about-stat-label {
+    font-size: 11px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .about-resume-button,
+  .about-resume-icon,
+  .about-resume-icon svg,
+  .about-stat-card,
+  .about-stat-icon {
+    transition: none;
+  }
+
+  .about-resume-button:hover,
+  .about-resume-button:active,
+  .about-resume-button:hover .about-resume-icon svg,
+  .about-stat-card:hover {
+    transform: none;
+  }
+}

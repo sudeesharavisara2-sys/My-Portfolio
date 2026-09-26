@@ -1,6 +1,7 @@
 import React from 'react';
 import FadeIn from './FadeIn';
-import './Skills.css';
+import '../styles/Skills.css';
+
 
 import {
   FaJava,
