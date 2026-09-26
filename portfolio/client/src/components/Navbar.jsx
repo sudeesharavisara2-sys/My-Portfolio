@@ -1,94 +1,109 @@
 import React, { useState, useEffect } from 'react';
+import '../styles/Navbar.css';
 
-const links = ['About', 'Skills', 'Projects', 'Experience', 'Contact'];
+var links = ['About', 'Skills', 'Projects', 'Experience', 'Contact'];
 
-export default function Navbar({ setIsPointerHovering }) {
-  const [scrolled, setScrolled] = useState(false);
+export default function Navbar(props) {
+  var setIsPointerHovering = props.setIsPointerHovering;
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+  var scrolledState = useState(false);
+  var scrolled = scrolledState[0];
+  var setScrolled = scrolledState[1];
+
+  var menuState = useState(false);
+  var menuOpen = menuState[0];
+  var setMenuOpen = menuState[1];
+
+  useEffect(function () {
+    function onScroll() {
+      setScrolled(window.scrollY > 20);
+    }
+    onScroll();
     window.addEventListener('scroll', onScroll);
-    return () => window.removeEventListener('scroll', onScroll);
+    return function () {
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
+  function handleEnter() {
+    if (setIsPointerHovering) {
+      setIsPointerHovering(true);
+    }
+  }
+
+  function handleLeave() {
+    if (setIsPointerHovering) {
+      setIsPointerHovering(false);
+    }
+  }
+
+  function closeMenu() {
+    setMenuOpen(false);
+  }
+
+  var navClass = 'navbar';
+  if (scrolled) {
+    navClass = navClass + ' navbar-scrolled';
+  }
+
+  var linksClass = 'navbar-links';
+  if (menuOpen) {
+    linksClass = linksClass + ' navbar-links-open';
+  }
+
   return (
-    <nav style={{
-      position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-      background: scrolled ? 'var(--navy2)' : 'transparent',
-      backdropFilter: scrolled ? 'blur(12px)' : 'none',
-      borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
-      boxShadow: scrolled ? '0 10px 30px -10px rgba(2, 12, 27, 0.7)' : 'none',
-      transition: 'all 0.3s ease-in-out',
-    }}>
-      <div style={{ 
-        maxWidth: 1100, 
-        margin: '0 auto', 
-        padding: '0 2rem', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'flex-end', // Aligns the entire menu container to the right side
-        height: 70 
-      }}>
-        
-        {/* Navigation Links List */}
-        <ul style={{ display: 'flex', gap: '2.5rem', listStyle: 'none', margin: 0, padding: 0, alignItems: 'center' }}>
-          
-          {/* Home Link - Placed inside the list so it aligns perfectly next to 'About' */}
+    <nav className={navClass}>
+      <div className="navbar-inner">
+        <a
+          href="#hero"
+          className="navbar-logo"
+          onClick={closeMenu}
+        >
+          Sudeesha<span className="navbar-logo-dot">.</span>
+        </a>
+
+        <ul className={linksClass}>
           <li>
-            <a 
-              href="#hero" 
-              style={{
-                color: 'var(--muted)',
-                fontSize: '0.85rem',
-                fontWeight: '500',
-                letterSpacing: '0.08em',
-                textTransform: 'uppercase',
-                textDecoration: 'none',
-                transition: 'all 0.2s ease',
-                cursor: 'none'
-              }}
-              onMouseEnter={e => {
-                e.target.style.color = 'var(--gold)';
-                if (setIsPointerHovering) setIsPointerHovering(true);
-              }}
-              onMouseLeave={e => {
-                e.target.style.color = 'var(--muted)';
-                if (setIsPointerHovering) setIsPointerHovering(false);
-              }}
+            <a
+              href="#hero"
+              className="navbar-link"
+              onMouseEnter={handleEnter}
+              onMouseLeave={handleLeave}
+              onClick={closeMenu}
             >
               Home
             </a>
           </li>
 
-          {/* Dynamic Section Links */}
-          {links.map(l => (
-            <li key={l}>
-              <a 
-                href={`#${l.toLowerCase()}`} 
-                style={{ 
-                  color: 'var(--muted)', 
-                  fontSize: '0.85rem', 
-                  fontWeight: '500',
-                  letterSpacing: '0.08em', 
-                  textTransform: 'uppercase',
-                  textDecoration: 'none',
-                  transition: 'all 0.2s ease',
-                  cursor: 'none'
-                }}
-                onMouseEnter={e => {
-                  e.target.style.color = 'var(--gold)';
-                  if(setIsPointerHovering) setIsPointerHovering(true);
-                }}
-                onMouseLeave={e => {
-                  e.target.style.color = 'var(--muted)';
-                  if(setIsPointerHovering) setIsPointerHovering(false);
-                }}
-              >
-                {l}
-              </a>
-            </li>
-          ))}
+          {links.map(function (l) {
+            return (
+              <li key={l}>
+                <a
+                  href={'#' + l.toLowerCase()}
+                  className="navbar-link"
+                  onMouseEnter={handleEnter}
+                  onMouseLeave={handleLeave}
+                  onClick={closeMenu}
+                >
+                  {l}
+                </a>
+              </li>
+            );
+          })}
         </ul>
+
+        <button
+          type="button"
+          className="navbar-toggle"
+          aria-label="Toggle menu"
+          onClick={function () {
+            setMenuOpen(!menuOpen);
+          }}
+        >
+          <span className={menuOpen ? 'navbar-bar navbar-bar-1-open' : 'navbar-bar'}></span>
+          <span className={menuOpen ? 'navbar-bar navbar-bar-2-open' : 'navbar-bar'}></span>
+          <span className={menuOpen ? 'navbar-bar navbar-bar-3-open' : 'navbar-bar'}></span>
+        </button>
       </div>
     </nav>
   );

@@ -1,175 +1,219 @@
-import React, { useState, useEffect } from 'react';
-import SectionHeader from './SectionHeader';
+import React from 'react';
 import FadeIn from './FadeIn';
+import '../styles/About.css';
 
-export default function About({ data }) {
-  const [isMobile, setIsMobile] = useState(false);
-  // State for custom cursor position
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [isPointerHovering, setIsPointerHovering] = useState(false);
+const stats = [
+  {
+    number: '3rd',
+    label: 'Year Undergraduate',
+    icon: 'education',
+  },
+  {
+    number: '3+',
+    label: 'Projects',
+    icon: 'code',
+  },
+  {
+    number: '1+',
+    label: 'Year Work Experience',
+    icon: 'work',
+  },
+  {
+    number: '10+',
+    label: 'Technologies Learned',
+    icon: 'layers',
+  },
+];
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    
-    // Custom cursor movement tracker
-    const handleMouseMove = (event) => {
-      setMousePos({ x: event.clientX, y: event.clientY });
-    };
-
-    handleResize(); 
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('mousemove', handleMouseMove);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
-  }, []);
-
-  const customStats = [
-    { number: "3rd", label: "Year Undergraduate" },
-    { number: "3+", label: "Projects" },
-    { number: "1+", label: "Year work experience" },
-    { number: "10+", label: "Technologies learned" }
-  ];
-
+function StatIcon({ type }) {
   return (
-    <section id="about" style={{ padding: isMobile ? '4rem 1rem' : '6rem 2rem', background: 'var(--navy2)', position: 'relative', cursor: 'none' }}>
-      
-      {/* Custom Cursor Element */}
-      {!isMobile && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: isPointerHovering ? '30px' : '12px',
-          height: isPointerHovering ? '30px' : '12px',
-          borderRadius: '50%',
-          backgroundColor: 'var(--gold)',
-          pointerEvents: 'none',
-          zIndex: 9999,
-          transform: `translate(${mousePos.x - (isPointerHovering ? 15 : 6)}px, ${mousePos.y - (isPointerHovering ? 15 : 6)}px)`,
-          transition: 'width 0.2s, height 0.2s, transform 0.1s',
-          mixBlendMode: 'difference'
-        }} />
+    <svg
+      width="22"
+      height="22"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.6"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      {type === 'education' && (
+        <>
+          <path d="m2 9 10-5 10 5-10 5-10-5Z" />
+          <path d="M6 11v6c3.5 3 8.5 3 12 0v-6" />
+          <path d="M22 9v7" />
+        </>
       )}
 
-      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', 
-          gap: isMobile ? '2.5rem' : '4rem', 
-          alignItems: 'center' 
-        }}>
-          
-          <div>
+      {type === 'code' && (
+        <>
+          <path d="m7 7-5 5 5 5" />
+          <path d="m17 7 5 5-5 5" />
+          <path d="m14 4-4 16" />
+        </>
+      )}
+
+      {type === 'work' && (
+        <>
+          <rect x="3" y="7" width="18" height="14" rx="2" />
+          <path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
+          <path d="M3 12a23 23 0 0 0 18 0" />
+          <path d="M12 11v4" />
+        </>
+      )}
+
+      {type === 'layers' && (
+        <>
+          <path d="m12 3 10 5-10 5L2 8l10-5Z" />
+          <path d="m2 12 10 5 10-5" />
+          <path d="m2 16 10 5 10-5" />
+        </>
+      )}
+    </svg>
+  );
+}
+
+function DownloadIcon() {
+  return (
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M12 3v12" />
+      <path d="m7 10 5 5 5-5" />
+      <path d="M5 16v4h14v-4" />
+    </svg>
+  );
+}
+
+export default function About({ data }) {
+  const aboutText =
+    typeof data?.about === 'string' && data.about.trim()
+      ? data.about
+      : 'Third-Year Software Engineering undergraduate at NSBM Green University, passionate about software development, web technologies, and problem solving.';
+
+  return (
+    <section
+      id="about"
+      className="about-section"
+      aria-labelledby="about-title"
+    >
+      <div className="about-container">
+        <div className="about-layout">
+          {/* INTRODUCTION */}
+          <div className="about-content">
             <FadeIn delay={0}>
-              <SectionHeader label="About Me" title={"Passionate about\nbuilding things"} />
-            </FadeIn>
-            <FadeIn delay={100}>
-              <p style={{ color: 'var(--muted)', marginBottom: '1rem', fontWeight: 300 }}>
-                {data?.about || "Third-Year Software Engineering undergraduate at NSBM Green University, passionate about software development, web technologies, and problem solving."}
-              </p>
-            </FadeIn>
-            <FadeIn delay={180}>
-              <p style={{ color: 'var(--muted)', marginBottom: '1rem', fontWeight: 300 }}>
-                Experienced in Java, Spring Boot, React, ASP.NET Core, PHP, SQL, RESTful APIs, and database development through academic and personal projects.
-              </p>
-            </FadeIn>
-            <FadeIn delay={250}>
-              <p style={{ color: 'var(--muted)', marginBottom: '2rem', fontWeight: 300 }}>
-                A fast learner with strong analytical, debugging, and teamwork skills, eager to gain industry experience and contribute to real-world IT projects.
-              </p>
+              <div className="about-eyebrow">
+                <span
+                  className="about-eyebrow-dot"
+                  aria-hidden="true"
+                />
+                <span>About Me</span>
+              </div>
+
+              <h2
+                id="about-title"
+                className="about-title"
+              >
+                Passionate about
+                <br />
+                <span>building things.</span>
+              </h2>
             </FadeIn>
 
-            {/* CV Download Button with Cursor Trigger & Color Updates */}
-            <FadeIn delay={300}>
-              <a
-                href="/Sudeesha-Resume.pdf"
-                target="_blank"
-                rel="noreferrer"
-                download="Sudeesha-Resume.pdf"
-                style={{
-                  display: 'inline-flex',
-                  alignItems: 'center',
-                  gap: '10px',
-                  background: 'transparent',
-                  color: 'var(--gold)',
-                  border: '1px solid var(--gold)',
-                  borderRadius: '8px',
-                  padding: '0.8rem 1.5rem',
-                  fontSize: '0.95rem',
-                  fontWeight: '500',
-                  textDecoration: 'none',
-                  transition: 'all 0.2s ease-in-out',
-                  cursor: 'none' // Hide default cursor over button
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = 'var(--gold)'; // Fills background with solid gold
-                  e.currentTarget.style.color = 'var(--navy)';       // Switches text/icon color to dark navy
-                  e.currentTarget.style.transform = 'translateY(-2px)';
-                  setIsPointerHovering(true);
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'transparent'; // Resets background to transparent
-                  e.currentTarget.style.color = 'var(--gold)';       // Resets text/icon color back to gold
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  setIsPointerHovering(false);
-                }}
-              >
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8L14 2Z" fill="currentColor" fillOpacity="0.15" />
-                  <path d="M14 2v6h6" />
-                  <line x1="12" y1="11" x2="12" y2="17" />
-                  <path d="M9 14.5l3 3 3-3" />
-                </svg>
-                Download Resume
-              </a>
+            <div className="about-text-wrapper">
+              <FadeIn delay={100}>
+                <p className="about-text about-text-lead">
+                  {aboutText}
+                </p>
+              </FadeIn>
+
+              <FadeIn delay={180}>
+                <p className="about-text">
+                  Experienced in Java, Spring Boot, React,
+                  ASP.NET Core, PHP, SQL, RESTful APIs, and
+                  database development through academic
+                  and personal projects.
+                </p>
+              </FadeIn>
+
+              <FadeIn delay={250}>
+                <p className="about-text">
+                  A fast learner with strong analytical,
+                  debugging, and teamwork skills, eager to
+                  gain industry experience and contribute
+                  to real-world IT projects.
+                </p>
+              </FadeIn>
+            </div>
+
+            {/* RESUME BUTTON */}
+            <FadeIn delay={320}>
+              <div className="about-actions">
+                <a
+                  href="/Sudeesha-Resume.pdf"
+                  download="Sudeesha-Resume.pdf"
+                  className="about-resume-button"
+                >
+                  <span className="about-resume-label">
+                    Download Resume
+                  </span>
+
+                  <span className="about-resume-icon">
+                    <DownloadIcon />
+                  </span>
+                </a>
+              </div>
             </FadeIn>
           </div>
 
-          <FadeIn delay={150} from={isMobile ? "bottom" : "right"}> 
-            <div style={{ 
-              display: 'grid', 
-              gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', 
-              gap: '1.5rem' 
-            }}>
-              {customStats.map((s, i) => (
-                <div 
-                  key={i} 
-                  style={{ 
-                    background: 'var(--card)', 
-                    border: '1px solid var(--border)', 
-                    borderRadius: 16, 
-                    padding: isMobile ? '1.5rem 1rem' : '2rem 1.5rem', 
-                    textAlign: 'center',
-                    transition: 'transform 0.3s ease'
-                  }}
-                >
-                  <div style={{ 
-                    fontFamily: "'Playfair Display', serif", 
-                    fontSize: isMobile ? '1.8rem' : '2.2rem', 
-                    color: 'var(--gold)', 
-                    fontWeight: 600 
-                  }}>
-                    {s.number}
-                  </div>
-                  <div style={{ 
-                    fontSize: '0.85rem', 
-                    color: 'var(--muted)', 
-                    marginTop: 8,
-                    textTransform: 'uppercase',
-                    letterSpacing: '1px'
-                  }}>
-                    {s.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </FadeIn>
+          {/* STANDALONE STAT CARDS */}
+          <div className="about-stats-column">
+            <FadeIn delay={160} from="right">
+              <dl
+                className="about-stats-grid"
+                aria-label="Education and experience statistics"
+              >
+                {stats.map((stat, index) => (
+                  <div
+                    className="about-stat-card"
+                    key={stat.label}
+                  >
+                    <div
+                      className="about-stat-top"
+                      aria-hidden="true"
+                    >
+                      <span className="about-stat-icon">
+                        <StatIcon type={stat.icon} />
+                      </span>
 
+                      <span className="about-stat-index">
+                        {String(index + 1).padStart(2, '0')}
+                      </span>
+                    </div>
+
+                    <dt className="about-stat-label">
+                      {stat.label}
+                    </dt>
+
+                    <dd className="about-stat-number">
+                      {stat.number}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </FadeIn>
+          </div>
         </div>
       </div>
     </section>
