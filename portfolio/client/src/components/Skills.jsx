@@ -1,5 +1,6 @@
 import React from 'react';
 import FadeIn from './FadeIn';
+import SoftwareTools from './SoftwareTools';
 import '../styles/Skills.css';
 
 import {
@@ -346,64 +347,72 @@ function TechnologyCard({ tech, index }) {
 
 export default function Skills() {
   return (
-    <section id="skills" className="skills-section">
-      <div className="skills-stars" aria-hidden="true" />
-      <div className="skills-floor-grid" aria-hidden="true" />
+    <>
+      <section id="skills" className="skills-section">
+        <div className="skills-stars" aria-hidden="true" />
 
-      <div
-        className="skills-background-glow skills-background-glow-1"
-        aria-hidden="true"
-      />
+        <div
+          className="skills-floor-grid"
+          aria-hidden="true"
+        />
 
-      <div
-        className="skills-background-glow skills-background-glow-2"
-        aria-hidden="true"
-      />
+        <div
+          className="skills-background-glow skills-background-glow-1"
+          aria-hidden="true"
+        />
 
-      <div className="skills-container">
-        <FadeIn>
-          <div className="skills-heading">
-            <p className="skills-eyebrow">
-              TECHNICAL SKILLS
-            </p>
+        <div
+          className="skills-background-glow skills-background-glow-2"
+          aria-hidden="true"
+        />
 
-            <h2 className="skills-title">
-              Skills &amp; <span>Technologies</span>
-            </h2>
+        <div className="skills-container">
+          <FadeIn>
+            <div className="skills-heading">
+              <p className="skills-eyebrow">
+                TECHNICAL SKILLS
+              </p>
 
-            <p className="skills-subtitle">
-              Technologies and tools I use to build full-stack
-              applications, APIs, and database-driven solutions.
-            </p>
-          </div>
-        </FadeIn>
+              <h2 className="skills-title">
+                Skills &amp; <span>Technologies</span>
+              </h2>
 
-        <div className="skills-showcase">
-          <div className="skills-left-column">
-            {skillGroups.map((group, index) => (
-              <SkillGroup
-                key={group.category}
-                group={group}
-                delay={index * 100}
-              />
-            ))}
-          </div>
-
-          <FadeIn delay={180}>
-            <div className="skills-tech-panel">
-              <div className="technology-grid">
-                {technologyIcons.map((tech, index) => (
-                  <TechnologyCard
-                    key={tech.name}
-                    tech={tech}
-                    index={index}
-                  />
-                ))}
-              </div>
+              <p className="skills-subtitle">
+                Technologies and tools I use to build full-stack
+                applications, APIs, and database-driven solutions.
+              </p>
             </div>
           </FadeIn>
+
+          <div className="skills-showcase">
+            <div className="skills-left-column">
+              {skillGroups.map((group, index) => (
+                <SkillGroup
+                  key={group.category}
+                  group={group}
+                  delay={index * 100}
+                />
+              ))}
+            </div>
+
+            <FadeIn delay={180}>
+              <div className="skills-tech-panel">
+                <div className="technology-grid">
+                  {technologyIcons.map((tech, index) => (
+                    <TechnologyCard
+                      key={tech.name}
+                      tech={tech}
+                      index={index}
+                    />
+                  ))}
+                </div>
+              </div>
+            </FadeIn>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <SoftwareTools />
+    </>
   );
 }
