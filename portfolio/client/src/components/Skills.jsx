@@ -2,7 +2,6 @@ import React from 'react';
 import FadeIn from './FadeIn';
 import '../styles/Skills.css';
 
-
 import {
   FaJava,
   FaPython,
@@ -69,7 +68,6 @@ const skillGroups = [
       },
     ],
   },
-
   {
     category: 'Development',
     items: [
@@ -117,7 +115,6 @@ const skillGroups = [
       },
     ],
   },
-
   {
     category: 'Databases',
     items: [
@@ -141,7 +138,6 @@ const skillGroups = [
       },
     ],
   },
-
   {
     category: 'Tools',
     items: [
@@ -198,7 +194,6 @@ const technologyIcons = [
     color: '#e34f26',
     glow: 'rgba(227, 79, 38, 0.35)',
   },
-
   {
     name: 'CSS3',
     icon: <FaCss3Alt />,
@@ -223,7 +218,6 @@ const technologyIcons = [
     color: '#339933',
     glow: 'rgba(51, 153, 51, 0.35)',
   },
-
   {
     name: 'Python',
     icon: <FaPython />,
@@ -248,7 +242,6 @@ const technologyIcons = [
     color: '#f05032',
     glow: 'rgba(240, 80, 50, 0.35)',
   },
-
   {
     name: 'GitHub',
     icon: <FaGithub />,
@@ -273,7 +266,6 @@ const technologyIcons = [
     color: '#cc2927',
     glow: 'rgba(204, 41, 39, 0.35)',
   },
-
   {
     name: 'Postman',
     icon: <SiPostman />,
@@ -352,35 +344,21 @@ function TechnologyCard({ tech, index }) {
   );
 }
 
-function WireframeShape() {
-  return (
-    <div
-      className="wireframe-wrapper"
-      aria-hidden="true"
-    >
-      <div className="wireframe-glow" />
-
-      <div className="wireframe-ring wireframe-ring-1" />
-      <div className="wireframe-ring wireframe-ring-2" />
-      <div className="wireframe-ring wireframe-ring-3" />
-      <div className="wireframe-ring wireframe-ring-4" />
-      <div className="wireframe-ring wireframe-ring-5" />
-      <div className="wireframe-ring wireframe-ring-6" />
-    </div>
-  );
-}
-
 export default function Skills() {
   return (
-    <section
-      id="skills"
-      className="skills-section"
-    >
-      <div className="skills-stars" />
-      <div className="skills-floor-grid" />
+    <section id="skills" className="skills-section">
+      <div className="skills-stars" aria-hidden="true" />
+      <div className="skills-floor-grid" aria-hidden="true" />
 
-      <div className="skills-background-glow skills-background-glow-1" />
-      <div className="skills-background-glow skills-background-glow-2" />
+      <div
+        className="skills-background-glow skills-background-glow-1"
+        aria-hidden="true"
+      />
+
+      <div
+        className="skills-background-glow skills-background-glow-2"
+        aria-hidden="true"
+      />
 
       <div className="skills-container">
         <FadeIn>
@@ -410,8 +388,6 @@ export default function Skills() {
               />
             ))}
           </div>
-
-          <WireframeShape />
 
           <FadeIn delay={180}>
             <div className="skills-tech-panel">
