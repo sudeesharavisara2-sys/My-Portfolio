@@ -1,257 +1,432 @@
-import React, { useState, useEffect } from 'react';
-import SectionHeader from './SectionHeader';
-import FadeIn from './FadeIn';
+// src/components/Contact.jsx
+// Replace your existing Contact.jsx.
+// Create src/styles/Contact.css using the CSS below.
 
-// Shared styles for input fields
-const inputStyle = {
-  background: 'rgba(15,28,46,0.6)', 
-  border: '1px solid var(--border)',
-  borderRadius: 6, 
-  padding: '10px 14px', 
-  color: 'var(--text)',
-  fontFamily: "'DM Sans', sans-serif", 
-  fontSize: '0.9rem',
-  outline: 'none', 
-  width: '100%', 
-  transition: 'border-color 0.2s',
+import React, { useRef, useState } from 'react';
+import FadeIn from './FadeIn';
+import {
+  FaArrowRight,
+  FaBriefcase,
+  FaCheckCircle,
+  FaEnvelope,
+  FaExclamationCircle,
+  FaGithub,
+  FaLinkedinIn,
+  FaMapMarkerAlt,
+  FaPaperPlane,
+  FaSpinner,
+} from 'react-icons/fa';
+import '../styles/Contact.css';
+
+const EMPTY_FORM = {
+  name: '',
+  email: '',
+  subject: '',
+  message: '',
 };
 
-/**
- * Reusable Input component with focus states
- */
-function Input({ label, ...props }) {
-  const [focused, setFocused] = useState(false);
+const ACCESS_KEY = '290df105-3f3c-4c64-a210-db7bbc0af7b7';
+
+function ContactField({
+  label,
+  name,
+  multiline = false,
+  ...props
+}) {
+  const id = `contact-${name}`;
+
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: 6, marginBottom: '1rem' }}>
-      <label style={{ fontSize: '0.78rem', color: 'var(--muted)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>
-        {label}
-      </label>
-      {props.textarea ? (
-        <textarea
-          {...props}
-          textarea={undefined}
-          onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
-          style={{ 
-            ...inputStyle, 
-            borderColor: focused ? 'var(--gold)' : 'var(--border)', 
-            resize: 'none' 
-          }}
-        />
+    <div className="contact-field">
+      <label htmlFor={id}>{label}</label>
+
+      {multiline ? (
+        <textarea id={id} name={name} required {...props} />
       ) : (
-        <input
-          {...props}
-          onFocus={() => setFocused(true)}
-          onBlur={() => setFocused(false)}
-          style={{ 
-            ...inputStyle, 
-            borderColor: focused ? 'var(--gold)' : 'var(--border)' 
-          }}
-        />
+        <input id={id} name={name} required {...props} />
       )}
     </div>
   );
 }
 
 export default function Contact({ data }) {
-  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
-  const [status, setStatus] = useState(null); // null | 'sending' | 'success' | 'error'
+  const [form, setForm] = useState(EMPTY_FORM);
+  const [status, setStatus] = useState('idle');
+  const [error, setError] = useState('');
 
-  // State to track if screen size matches mobile responsive breakpoints
-  const [isMobile, setIsMobile] = useState(false);
+  const sendingRef = useRef(false);
 
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
-    
-    handleResize(); // Initialize width checks on component mount
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  // Existing contact details are preserved.
+  const email = data?.email || 'sudeesharavisara2@email.com';
+  const location = data?.location || 'Nittambuwa, Sri Lanka';
 
-  const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
+  const github =
+    data?.github || 'https://github.com/sudeesharavisara2-sys';
 
-  const handleSubmit = async () => {
-    if (!form.name || !form.email || !form.subject || !form.message) {
+  const linkedin =
+    data?.linkedin ||
+    'https://www.linkedin.com/in/sudeesha-ravisara/';
+
+  const sending = status === 'sending';
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    setForm((current) => ({
+      ...current,
+      [name]: value,
+    }));
+
+    if (status !== 'idle') {
+      setStatus('idle');
+      setError('');
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (sendingRef.current) return;
+
+    const values = Object.fromEntries(
+      Object.entries(form).map(([key, value]) => [
+        key,
+        value.trim(),
+      ])
+    );
+
+    if (Object.values(values).some((value) => !value)) {
+      setError(
+        'Please complete every field before sending your message.'
+      );
       setStatus('error');
       return;
     }
+
+    sendingRef.current = true;
     setStatus('sending');
+    setError('');
+
+    const controller = new AbortController();
+
+    const timeout = window.setTimeout(
+      () => controller.abort(),
+      20000
+    );
+
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          access_key: '290df105-3f3c-4c64-a210-db7bbc0af7b7',
-          name: form.name,
-          email: form.email,
-          subject: form.subject,
-          message: form.message,
-        }),
-      });
-      const result = await res.json();
-      if (result.success) {
-        setStatus('success');
-        setForm({ name: '', email: '', subject: '', message: '' });
-      } else {
-        setStatus('error');
+      const response = await fetch(
+        'https://api.web3forms.com/submit',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            access_key: ACCESS_KEY,
+            ...values,
+          }),
+          signal: controller.signal,
+        }
+      );
+
+      const result = await response.json();
+
+      if (!response.ok || !result.success) {
+        throw new Error('Submission failed');
       }
-    } catch {
+
+      setForm(EMPTY_FORM);
+      setStatus('success');
+    } catch (submissionError) {
+      setError(
+        submissionError.name === 'AbortError'
+          ? 'The request timed out. Delivery could not be confirmed. Please try again later or email me directly.'
+          : 'Your message could not be confirmed as sent. Please check your connection and try again, or email me directly.'
+      );
+
       setStatus('error');
+    } finally {
+      window.clearTimeout(timeout);
+      sendingRef.current = false;
     }
   };
 
   return (
-    <section id="contact" style={{ 
-      padding: isMobile ? '4rem 1.5rem' : '6rem 2rem', 
-      background: 'var(--navy2)' 
-    }}>
-      <div style={{ maxWidth: 1100, margin: '0 auto' }}>
-        {/* Animate Header */}
-        <FadeIn from="bottom">
-          <SectionHeader label="Get in touch" title="Let's Connect" />
+    <section
+      id="contact"
+      className="contact-section"
+      aria-labelledby="contact-title"
+    >
+      <div className="contact-ambient" aria-hidden="true" />
+
+      <div className="contact-container">
+        <FadeIn>
+          <header className="contact-heading">
+            <p className="contact-eyebrow">
+              <span aria-hidden="true" />
+              GET IN TOUCH
+            </p>
+
+            <h2 id="contact-title">
+              Let's build something <span>great.</span>
+            </h2>
+
+            <p className="contact-subtitle">
+              Have an opportunity or an idea in mind? I'd love
+              to hear from you.
+            </p>
+          </header>
         </FadeIn>
 
-        <div style={{ 
-          display: 'grid', 
-          // Drop layout grid columns into a singular stack structure automatically on mobile
-          gridTemplateColumns: isMobile ? '1fr' : '1fr 1.4fr', 
-          gap: isMobile ? '2.5rem' : '4rem', 
-          alignItems: 'start',
-          marginTop: '3rem' 
-        }}>
-
-          {/* Left Column: Contact Info - Animates from Left */}
-          <FadeIn from={isMobile ? "bottom" : "left"} delay={100}>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-              <p style={{ 
-                color: 'var(--muted)', 
-                fontWeight: 300, 
-                lineHeight: 1.7,
-                textAlign: isMobile ? 'center' : 'left' 
-              }}>
-                I'm open to internship opportunities, collaborations, and interesting projects.
-                Feel free to reach out — I'll get back to you as soon as I can.
+        <div className="contact-layout">
+          <FadeIn delay={100}>
+            <div className="contact-info-panel">
+              <p className="contact-availability">
+                <span aria-hidden="true" />
+                Open to internships
               </p>
-              
-              <div style={{ 
-                display: 'flex', 
-                flexDirection: 'column', 
-                gap: '1.5rem',
-                alignItems: isMobile ? 'center' : 'flex-start'
-              }}>
-                {[
-                  { icon: '✉', label: 'Email', value: data?.email || 'sudeesharavisara2@email.com' },
-                  { icon: '📍', label: 'Location', value: data?.location || 'Nittambuwa, Sri Lanka' },
-                  { icon: '🕐', label: 'Availability', value: 'Open to internships' },
-                ].map(({ icon, label, value }) => (
-                  <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 14, width: isMobile ? '100%' : 'auto', maxWidth: 320 }}>
-                    <div style={{
-                      width: 40, height: 40, borderRadius: 8, background: 'var(--card)',
-                      border: '1px solid var(--border)', display: 'flex', alignItems: 'center',
-                      justifyContent: 'center', fontSize: 16, flexShrink: 0,
-                    }}>{icon}</div>
-                    <div>
-                      <div style={{ fontSize: '0.75rem', color: 'var(--muted)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 2 }}>{label}</div>
-                      <div style={{ fontSize: '0.92rem', color: 'var(--text)' }}>{value}</div>
-                    </div>
-                  </div>
-                ))}
+
+              <h3>
+                A conversation is
+                <br />
+                a good place to start.
+              </h3>
+
+              <p className="contact-intro">
+                I'm open to internship opportunities, collaborations,
+                and interesting projects. Tell me what you're working
+                on and how I can contribute.
+              </p>
+
+              <div className="contact-methods">
+                <a
+                  className="contact-method contact-method-link"
+                  href={`mailto:${email}`}
+                >
+                  <span className="contact-method-icon">
+                    <FaEnvelope aria-hidden="true" />
+                  </span>
+
+                  <span className="contact-method-text">
+                    <span className="contact-method-label">
+                      EMAIL ME
+                    </span>
+
+                    <span className="contact-method-value">
+                      {email}
+                    </span>
+                  </span>
+
+                  <FaArrowRight
+                    className="contact-method-arrow"
+                    aria-hidden="true"
+                  />
+                </a>
+
+                <div className="contact-method">
+                  <span className="contact-method-icon">
+                    <FaMapMarkerAlt aria-hidden="true" />
+                  </span>
+
+                  <span className="contact-method-text">
+                    <span className="contact-method-label">
+                      BASED IN
+                    </span>
+
+                    <span className="contact-method-value">
+                      {location}
+                    </span>
+                  </span>
+                </div>
+
+                <div className="contact-method">
+                  <span className="contact-method-icon">
+                    <FaBriefcase aria-hidden="true" />
+                  </span>
+
+                  <span className="contact-method-text">
+                    <span className="contact-method-label">
+                      LET'S TALK ABOUT
+                    </span>
+
+                    <span className="contact-method-value">
+                      Internships &amp; collaborations
+                    </span>
+                  </span>
+                </div>
               </div>
 
-              <div style={{ textAlign: isMobile ? 'center' : 'left' }}>
-                <div style={{ fontSize: '0.75rem', color: 'var(--muted)', letterSpacing: '0.06em', textTransform: 'uppercase', marginBottom: 10 }}>Find me on</div>
-                <div style={{ 
-                  display: 'flex', 
-                  gap: 10,
-                  justifyContent: isMobile ? 'center' : 'flex-start' 
-                }}>
-                  {[
-                    { 
-                      label: 'GitHub', 
-                      href: data?.github || 'https://github.com/sudeesharavisara2-sys',
-                      icon: (
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                      )
-                    }, 
-                    { 
-                      label: 'LinkedIn', 
-                      href: data?.linkedin || 'https://www.linkedin.com/in/sudeesha-ravisara/',
-                      icon: (
-                        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                          <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                        </svg>
-                      )
-                    }
-                  ].map(({ label, href, icon }) => (
-                    <a key={label} href={href} target="_blank" rel="noreferrer"
-                      style={{
-                        display: 'inline-flex', alignItems: 'center', gap: 8,
-                        padding: '8px 16px', background: 'var(--card)', border: '1px solid var(--border)',
-                        borderRadius: 6, color: 'var(--muted)', fontSize: '0.82rem', transition: 'all 0.2s', textDecoration: 'none'
-                      }}
-                      onMouseEnter={e => { 
-                        e.currentTarget.style.borderColor = 'var(--gold)'; 
-                        e.currentTarget.style.color = 'var(--gold)'; 
-                      }}
-                      onMouseLeave={e => { 
-                        e.currentTarget.style.borderColor = 'var(--border)'; 
-                        e.currentTarget.style.color = 'var(--muted)'; 
-                      }}>
-                      {icon} {label}
-                    </a>
-                  ))}
+              <div className="contact-social-section">
+                <p>Find me online</p>
+
+                <div className="contact-social-links">
+                  <a
+                    href={github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Visit my GitHub profile (opens in a new tab)"
+                  >
+                    <FaGithub
+                      className="contact-github-icon"
+                      aria-hidden="true"
+                    />
+
+                    <span>GitHub</span>
+
+                    <FaArrowRight
+                      className="contact-social-arrow"
+                      aria-hidden="true"
+                    />
+                  </a>
+
+                  <a
+                    href={linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Visit my LinkedIn profile (opens in a new tab)"
+                  >
+                    <FaLinkedinIn
+                      className="contact-linkedin-icon"
+                      aria-hidden="true"
+                    />
+
+                    <span>LinkedIn</span>
+
+                    <FaArrowRight
+                      className="contact-social-arrow"
+                      aria-hidden="true"
+                    />
+                  </a>
                 </div>
               </div>
             </div>
           </FadeIn>
 
-          {/* Right Column: Contact Form - Animates from Right with slight delay */}
-          <FadeIn from={isMobile ? "bottom" : "right"} delay={300}>
-            <div style={{ 
-              background: 'var(--card)', 
-              border: '1px solid var(--border)', 
-              borderRadius: 14, 
-              padding: isMobile ? '1.5rem' : '2rem' 
-            }}>
-              {/* Stack Name and Email fields vertically on mobile screen form rows */}
-              <div style={{ 
-                display: 'grid', 
-                gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', 
-                gap: isMobile ? '0rem' : '1rem' 
-              }}>
-                <Input label="Your name" name="name" type="text" placeholder="Jane Smith" value={form.name} onChange={handleChange} />
-                <Input label="Email address" name="email" type="email" placeholder="jane@example.com" value={form.email} onChange={handleChange} />
+          <FadeIn delay={180}>
+            <div className="contact-form-panel">
+              <div className="contact-form-heading">
+                <div>
+                  <p className="contact-form-eyebrow">
+                    START A CONVERSATION
+                  </p>
+
+                  <h3>Send a message</h3>
+                </div>
+
+                <span className="contact-form-symbol">
+                  <FaPaperPlane aria-hidden="true" />
+                </span>
               </div>
-              <Input label="Subject" name="subject" type="text" placeholder="Internship / Collaboration / etc." value={form.subject} onChange={handleChange} />
-              <Input label="Message" name="message" textarea rows={5} placeholder={`Hi Sudeesha, I'd love to connect about...`} value={form.message} onChange={handleChange} />
 
-              {status === 'success' && (
-                <p style={{ color: '#5DCAA5', fontSize: '0.88rem', marginBottom: '0.75rem' }}>✓ Message sent! I'll be in touch soon.</p>
-              )}
-              {status === 'error' && (
-                <p style={{ color: '#F0997B', fontSize: '0.88rem', marginBottom: '0.75rem' }}>✗ Please fill in all fields and try again.</p>
-              )}
-
-              <button onClick={handleSubmit} disabled={status === 'sending'}
-                style={{
-                  width: '100%', padding: 13,
-                  background: status === 'success' ? '#3B6D11' : 'var(--gold)',
-                  color: 'var(--navy)', border: 'none', borderRadius: 6,
-                  fontFamily: "'DM Sans', sans-serif", fontSize: '0.95rem', fontWeight: 500,
-                  cursor: status === 'sending' ? 'not-allowed' : 'pointer', transition: 'background 0.2s',
-                }}>
-                {status === 'sending' ? 'Sending...' : status === 'success' ? 'Message Sent!' : 'Send Message'}
-              </button>
-              <p style={{ fontSize: '0.78rem', color: 'var(--muted)', textAlign: 'center', marginTop: '0.75rem' }}>
-                I typically respond within 24–48 hours.
+              <p className="contact-form-description">
+                Share a few details below. All fields are required.
               </p>
+
+              <form
+                className="contact-form"
+                onSubmit={handleSubmit}
+              >
+                <fieldset
+                  disabled={sending}
+                  className="contact-fields"
+                  aria-label="Message details"
+                >
+                  <div className="contact-form-row">
+                    <ContactField
+                      label="Your name"
+                      name="name"
+                      type="text"
+                      autoComplete="name"
+                      placeholder="Your full name"
+                      maxLength={100}
+                      value={form.name}
+                      onChange={handleChange}
+                    />
+
+                    <ContactField
+                      label="Email address"
+                      name="email"
+                      type="email"
+                      autoComplete="email"
+                      placeholder="you@example.com"
+                      maxLength={254}
+                      value={form.email}
+                      onChange={handleChange}
+                    />
+                  </div>
+
+                  <ContactField
+                    label="Subject"
+                    name="subject"
+                    type="text"
+                    placeholder="Internship, collaboration, or a project idea"
+                    maxLength={200}
+                    value={form.subject}
+                    onChange={handleChange}
+                  />
+
+                  <ContactField
+                    label="Your message"
+                    name="message"
+                    multiline
+                    rows={6}
+                    placeholder="Hi Sudeesha, I'd like to connect about…"
+                    maxLength={5000}
+                    value={form.message}
+                    onChange={handleChange}
+                  />
+                </fieldset>
+
+                <div
+                  className="contact-feedback"
+                  role="status"
+                  aria-live="polite"
+                  aria-atomic="true"
+                >
+                  {status === 'success' && (
+                    <p className="contact-notice contact-notice-success">
+                      <FaCheckCircle aria-hidden="true" />
+
+                      <span>
+                        Message sent! Thanks for reaching out.
+                        I'll get back to you soon.
+                      </span>
+                    </p>
+                  )}
+
+                  {status === 'error' && (
+                    <p className="contact-notice contact-notice-error">
+                      <FaExclamationCircle aria-hidden="true" />
+                      <span>{error}</span>
+                    </p>
+                  )}
+                </div>
+
+                <button
+                  className="contact-submit"
+                  type="submit"
+                  disabled={sending}
+                >
+                  <span>
+                    {sending ? 'Sending message…' : 'Send message'}
+                  </span>
+
+                  {sending ? (
+                    <FaSpinner
+                      className="contact-spinner"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <FaArrowRight aria-hidden="true" />
+                  )}
+                </button>
+
+                <p className="contact-response-note">
+                  I typically respond within 24–48 hours.
+                </p>
+              </form>
             </div>
           </FadeIn>
-
         </div>
       </div>
     </section>
