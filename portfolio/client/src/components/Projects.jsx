@@ -1,4 +1,11 @@
 // src/components/Projects.jsx
+// Replace this entire file. Keep your existing Projects.css.
+//
+// Each screenshot displays for 2 seconds.
+// After the last screenshot, the next project starts.
+// After the last project, the slideshow returns to the first.
+// Pause stops autoplay. Hidden tabs and reduced-motion settings also stop it.
+// Only clicking a project thumbnail triggers scrolling.
 
 import React, { useEffect, useRef, useState } from 'react';
 import FadeIn from './FadeIn';
@@ -16,8 +23,7 @@ import {
   FaPlay,
 } from 'react-icons/fa';
 
-const PROJECT_DURATION = 22000;
-const SCREENSHOT_DURATION = 3500;
+const SCREENSHOT_DURATION = 2000;
 
 const projectData = [
   {
@@ -394,6 +400,7 @@ function ProjectCover({ project }) {
       <span className="project-cover-icon" aria-hidden="true">
         <Icon />
       </span>
+
       <span className="project-cover-name">{project.name}</span>
       <span className="project-cover-category">{project.category}</span>
       <span className="project-cover-type">{project.type}</span>
@@ -423,20 +430,11 @@ function ProjectScreenshot({ src, alt }) {
   );
 }
 
-function ProjectGallery({ project, stopped }) {
-  const [imageIndex, setImageIndex] = useState(0);
+// The parent controls the current screenshot.
+// This component does not run a separate timer.
+function ProjectGallery({ project, imageIndex, onSelectImage }) {
   const images = project.images;
   const hasImages = images.length > 0;
-
-  useEffect(() => {
-    if (stopped || images.length < 2) return undefined;
-
-    const timer = window.setTimeout(() => {
-      setImageIndex((current) => (current + 1) % images.length);
-    }, SCREENSHOT_DURATION);
-
-    return () => window.clearTimeout(timer);
-  }, [imageIndex, stopped, images]);
 
   return (
     <div className="project-gallery">
@@ -449,6 +447,7 @@ function ProjectGallery({ project, stopped }) {
           </span>
 
           <span className="project-browser-title">{project.name}</span>
+
           <span className="project-browser-badge">
             {hasImages ? 'PREVIEW' : 'PROJECT'}
           </span>
@@ -486,7 +485,7 @@ function ProjectGallery({ project, stopped }) {
                 className={`project-image-dot ${
                   index === imageIndex ? 'is-active' : ''
                 }`}
-                onClick={() => setImageIndex(index)}
+                onClick={() => onSelectImage(index)}
                 aria-label={`Show screenshot ${index + 1} of ${project.name}`}
                 aria-pressed={index === imageIndex}
               >
@@ -505,11 +504,31 @@ function ProjectGallery({ project, stopped }) {
   );
 }
 
+// Advance through every image before moving to the next project.
+// Projects without images display their cover for one interval.
+function advanceSlide(current) {
+  const imageCount = projectData[current.projectIndex].images.length;
+
+  if (current.imageIndex + 1 < imageCount) {
+    return {
+      ...current,
+      imageIndex: current.imageIndex + 1,
+    };
+  }
+
+  return {
+    projectIndex: (current.projectIndex + 1) % projectData.length,
+    imageIndex: 0,
+  };
+}
+
 export default function Projects() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [slide, setSlide] = useState({
+    projectIndex: 0,
+    imageIndex: 0,
+  });
+
   const [paused, setPaused] = useState(false);
-  const [hovered, setHovered] = useState(false);
-  const [focusWithin, setFocusWithin] = useState(false);
   const [showcaseRequest, setShowcaseRequest] = useState(0);
 
   const showcaseRef = useRef(null);
@@ -518,26 +537,24 @@ export default function Projects() {
   const reducedMotion = useReducedMotion();
   const pageVisible = usePageVisible();
 
-  const stopped =
-    paused || hovered || focusWithin || reducedMotion || !pageVisible;
-
+  const stopped = paused || reducedMotion || !pageVisible;
+  const activeIndex = slide.projectIndex;
   const activeProject = projectData[activeIndex];
 
+  // One timer controls screenshots and project changes.
+  // Every screenshot, including the last, gets a two-second interval.
+  // Manual navigation and Resume restart the interval.
   useEffect(() => {
     if (stopped) return undefined;
 
     const timer = window.setTimeout(() => {
-      setActiveIndex((current) => (current + 1) % projectData.length);
-    }, PROJECT_DURATION);
+      setSlide(advanceSlide);
+    }, SCREENSHOT_DURATION);
 
     return () => window.clearTimeout(timer);
-  }, [activeIndex, stopped]);
+  }, [slide, stopped]);
 
-  /*
-    Scroll only after a thumbnail card is clicked.
-    Automatic slides and screenshot changes never trigger scrolling.
-    The request counter also handles clicking the already-selected card.
-  */
+  // Scroll only when a thumbnail card is clicked.
   useEffect(() => {
     if (!pendingShowcaseScroll.current) return;
 
@@ -547,6 +564,7 @@ export default function Projects() {
     pendingShowcaseScroll.current = false;
 
     showcase.focus({ preventScroll: true });
+
     showcase.scrollIntoView({
       behavior: reducedMotion ? 'auto' : 'smooth',
       block: 'start',
@@ -554,20 +572,38 @@ export default function Projects() {
     });
   }, [activeIndex, showcaseRequest, reducedMotion]);
 
+  // Selecting a project starts from its first screenshot.
   const selectProject = (index) => {
     pendingShowcaseScroll.current = true;
-    setActiveIndex(index);
+
+    setSlide({
+      projectIndex: index,
+      imageIndex: 0,
+    });
+
     setShowcaseRequest((current) => current + 1);
   };
 
   const previousProject = () => {
-    setActiveIndex(
-      (current) => (current - 1 + projectData.length) % projectData.length
-    );
+    setSlide((current) => ({
+      projectIndex:
+        (current.projectIndex - 1 + projectData.length) % projectData.length,
+      imageIndex: 0,
+    }));
   };
 
   const nextProject = () => {
-    setActiveIndex((current) => (current + 1) % projectData.length);
+    setSlide((current) => ({
+      projectIndex: (current.projectIndex + 1) % projectData.length,
+      imageIndex: 0,
+    }));
+  };
+
+  const selectImage = (index) => {
+    setSlide((current) => ({
+      ...current,
+      imageIndex: index,
+    }));
   };
 
   return (
@@ -597,17 +633,7 @@ export default function Projects() {
           </div>
         </FadeIn>
 
-        <div
-          className="projects-interactive"
-          onMouseEnter={() => setHovered(true)}
-          onMouseLeave={() => setHovered(false)}
-          onFocusCapture={() => setFocusWithin(true)}
-          onBlurCapture={(event) => {
-            if (!event.currentTarget.contains(event.relatedTarget)) {
-              setFocusWithin(false);
-            }
-          }}
-        >
+        <div className="projects-interactive">
           <div
             id="project-showcase"
             ref={showcaseRef}
@@ -625,6 +651,7 @@ export default function Projects() {
 
               <span className="project-header-count">
                 {activeProject.number}
+
                 <span>
                   {' / '}
                   {String(projectData.length).padStart(2, '0')}
@@ -642,7 +669,11 @@ export default function Projects() {
               }`}
             >
               <div className="project-preview-column">
-                <ProjectGallery project={activeProject} stopped={stopped} />
+                <ProjectGallery
+                  project={activeProject}
+                  imageIndex={slide.imageIndex}
+                  onSelectImage={selectImage}
+                />
               </div>
 
               <div className="project-details">
@@ -658,7 +689,9 @@ export default function Projects() {
                   )}
                 </div>
 
-                <h3 className="project-name">{activeProject.name}</h3>
+                <h3 className="project-name">
+                  {activeProject.name}
+                </h3>
 
                 <p className="project-description">
                   {activeProject.description}
@@ -764,6 +797,7 @@ export default function Projects() {
                     ) : (
                       <FaPause aria-hidden="true" />
                     )}
+
                     <span>{paused ? 'Resume' : 'Pause'}</span>
                   </button>
                 )}
@@ -817,12 +851,16 @@ export default function Projects() {
                     <span className="project-selector-name">
                       {project.name}
                     </span>
+
                     <span className="project-selector-caption">
                       {project.type}
                     </span>
                   </span>
 
-                  <span className="project-selector-arrow" aria-hidden="true">
+                  <span
+                    className="project-selector-arrow"
+                    aria-hidden="true"
+                  >
                     <FaArrowRight />
                   </span>
                 </span>
