@@ -1,6 +1,6 @@
 // src/components/Projects.jsx
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import FadeIn from './FadeIn';
 import '../styles/Projects.css';
 
@@ -16,32 +16,6 @@ import {
   FaPlay,
 } from 'react-icons/fa';
 
-/*
-  Add your actual URLs below.
-  Buttons appear automatically when a URL is provided.
-
-  Add screenshot paths after placing the images in:
-  client/public/projects/
-
-  Example screenshot path:
-  '/projects/your-image.png'
-*/
-const newProjectAssets = {
-  agroo: {
-    github: '',
-    liveDemo: '',
-    images: [],
-  },
-  fiveSamath: {
-    github: '',
-    images: [],
-  },
-  nsbmDays: {
-    figma: '',
-    images: [],
-  },
-};
-
 const PROJECT_DURATION = 22000;
 const SCREENSHOT_DURATION = 3500;
 
@@ -53,6 +27,7 @@ const projectData = [
     category: 'Enterprise Resource Planning',
     date: 'Jul 2026',
     type: 'Development',
+    thumbnail: '/projects/NexaERP.png',
     description:
       'Contributed to an 11-module ERP system, developing business functionality using Java, Spring Boot, React, and PostgreSQL.',
     highlights: [
@@ -71,6 +46,7 @@ const projectData = [
     github: 'https://github.com/sudeesharavisara2-sys/Erp_Backend.git',
     liveDemo: 'https://nexaerp-frontend.vercel.app/login',
     images: [
+      '/projects/NexaERP.png',
       '/projects/nexaerp1.png',
       '/projects/nexaerp2.png',
       '/projects/nexaerp3.png',
@@ -84,6 +60,7 @@ const projectData = [
     category: 'Agricultural Marketplace',
     date: 'Aug 2026',
     type: 'Development',
+    thumbnail: '/projects/Agroo_thumbnail.jpg',
     description:
       'Developed a full-stack agricultural marketplace platform using Spring Boot, React, TypeScript, and PostgreSQL.',
     highlights: [
@@ -102,10 +79,11 @@ const projectData = [
       'WebSocket',
       'OpenAI API',
     ],
-
-    github: 'https://github.com/sudeesharavisara2-sys/AgrooWebApp-backend.git',
+    github:
+      'https://github.com/sudeesharavisara2-sys/AgrooWebApp-backend.git',
     liveDemo: 'https://agroo-web-app-frontend.vercel.app/',
     images: [
+      '/projects/Agroo_thumbnail.jpg',
       '/projects/agroo1.png',
       '/projects/agroo2.png',
       '/projects/agroo3.png',
@@ -124,12 +102,8 @@ const projectData = [
       '/projects/agroo16.png',
       '/projects/agroo17.png',
       '/projects/agroo18.png',
-  
     ],
-
-    
   },
-
   {
     id: 'fivesamath',
     number: '03',
@@ -138,6 +112,7 @@ const projectData = [
     date: 'Jun 2026',
     status: 'In Development',
     type: 'Development',
+    thumbnail: '/projects/FiveSamath.png',
     description:
       'Developing a full-stack learning platform for Sri Lankan Grade 5 Scholarship students using ASP.NET Core, React, TypeScript, and SQL Server.',
     highlights: [
@@ -152,10 +127,12 @@ const projectData = [
       'SQL Server',
       'JWT',
     ],
-    github: 'https://github.com/sudeesharavisara2-sys/FiveSamath.API-Frontend.git',
-    liveDemo: 'https://fivesamath-api-frontend.sudeesharavisara2.workers.dev/',
-    
+    github:
+      'https://github.com/sudeesharavisara2-sys/FiveSamath.API-Frontend.git',
+    liveDemo:
+      'https://fivesamath-api-frontend.sudeesharavisara2.workers.dev/',
     images: [
+      '/projects/FiveSamath.png',
       '/projects/FiveSamath1.png',
       '/projects/FiveSamath2.png',
       '/projects/FiveSamath3.png',
@@ -171,8 +148,6 @@ const projectData = [
       '/projects/FiveSamath13.png',
       '/projects/FiveSamath14.png',
     ],
-    
-  
   },
   {
     id: 'nextstep',
@@ -181,6 +156,7 @@ const projectData = [
     category: 'University Management',
     date: 'Jan 2026',
     type: 'Development',
+    thumbnail: '/projects/NextStep.png',
     description:
       'Developed a full-stack university platform for logistics, shuttle tracking, and resource management.',
     highlights: [
@@ -191,44 +167,45 @@ const projectData = [
     tags: ['Java', 'Spring Boot', 'React', 'MySQL', 'REST APIs'],
     github: 'https://github.com/sudeesharavisara2-sys/NextStep.git',
     images: [
+      '/projects/NextStep.png',
       '/projects/nextstep1.png',
       '/projects/nextstep2.png',
       '/projects/nextstep3.png',
       '/projects/nextstep4.png',
     ],
   },
-  
   {
-  id: 'nsbmdays',
-  number: '05',
-  name: 'NSBMDAYS',
-  category: 'University Digital Platform',
-  date: 'Oct 2025',
-  type: 'UI/UX Design',
-  description:
-    'Designed a university digital platform prototype integrating academic and student services using Figma.',
-  highlights: [
-    'Applied HCI principles to design user flows, information architecture, navigation, and accessible interfaces.',
-    'Conducted usability-focused design and iterated interfaces based on user needs and feedback.',
-  ],
-  tags: [
-    'Figma',
-    'HCI',
-    'UI/UX',
-    'Prototyping',
-    'Wireframing',
-    'Usability',
-  ],
-  figma:
-    'https://www.figma.com/design/2jPpx0t81FkPxJIXhMVcUJ/NSBMDAYS-UI?node-id=1-3&p=f',
-  images: [
-    '/projects/HCI1.jpg',
-    '/projects/HCI2.jpg',
-    '/projects/HCI3.jpg',
-    '/projects/HCI4.jpg',
-  ],
-},
-
+    id: 'nsbmdays',
+    number: '05',
+    name: 'NSBMDAYS',
+    category: 'University Digital Platform',
+    date: 'Oct 2025',
+    type: 'UI/UX Design',
+    thumbnail: '/projects/HCI.png',
+    description:
+      'Designed a university digital platform prototype integrating academic and student services using Figma.',
+    highlights: [
+      'Applied HCI principles to design user flows, information architecture, navigation, and accessible interfaces.',
+      'Conducted usability-focused design and iterated interfaces based on user needs and feedback.',
+    ],
+    tags: [
+      'Figma',
+      'HCI',
+      'UI/UX',
+      'Prototyping',
+      'Wireframing',
+      'Usability',
+    ],
+    figma:
+      'https://www.figma.com/design/2jPpx0t81FkPxJIXhMVcUJ/NSBMDAYS-UI?node-id=1-3&p=f',
+    images: [
+      '/projects/HCI.png',
+      '/projects/HCI1.jpg',
+      '/projects/HCI2.jpg',
+      '/projects/HCI3.jpg',
+      '/projects/HCI4.jpg',
+    ],
+  },
   {
     id: 'hirepath',
     number: '06',
@@ -236,6 +213,7 @@ const projectData = [
     category: 'Recruitment & Talent Management',
     date: 'Jul 2026',
     type: 'Development',
+    thumbnail: '/projects/HireParth.png',
     description:
       'Contributed to a recruitment platform for managing candidates, skills, experience, resumes, and job searches.',
     highlights: [
@@ -253,12 +231,12 @@ const projectData = [
     ],
     github: 'https://github.com/sudeesharavisara2-sys/HirePath.git',
     images: [
+      '/projects/HireParth.png',
       '/projects/hirepath1.png',
       '/projects/hirepath2.png',
       '/projects/hirepath3.png',
     ],
   },
-  
   {
     id: 'sparehublk',
     number: '07',
@@ -266,6 +244,7 @@ const projectData = [
     category: 'Automotive Parts E-Commerce',
     date: 'Oct 2025',
     type: 'Development',
+    thumbnail: '/projects/SpareHub.png',
     description:
       'Developed a web-based automotive parts e-commerce application using PHP, MySQL, HTML, and CSS.',
     highlights: [
@@ -273,8 +252,10 @@ const projectData = [
       'Designed relational database operations and optimized queries for efficient data retrieval.',
     ],
     tags: ['PHP', 'MySQL', 'HTML', 'CSS', 'CRUD', 'E-Commerce'],
-    github: 'https://github.com/sudeesharavisara2-sys/sparehublk.com.git',
+    github:
+      'https://github.com/sudeesharavisara2-sys/sparehublk.com.git',
     images: [
+      '/projects/SpareHub.png',
       '/projects/sparehub1.png',
       '/projects/sparehub2.png',
       '/projects/sparehub3.png',
@@ -287,6 +268,7 @@ const projectData = [
     category: 'Vehicle Price Prediction',
     date: 'Jun 2026',
     type: 'Development',
+    thumbnail: '/projects/CarPrice.jpg',
     description:
       'Developed a vehicle price prediction system using Python, Flask, MySQL, and machine learning.',
     highlights: [
@@ -305,13 +287,13 @@ const projectData = [
     ],
     github: 'https://github.com/sudeesharavisara2-sys/CarPriceLK.git',
     images: [
+      '/projects/CarPrice.jpg',
       '/projects/carpricelk1.png',
       '/projects/carpricelk2.png',
       '/projects/carpricelk3.png',
       '/projects/carpricelk4.png',
     ],
   },
-  
 ];
 
 function useReducedMotion() {
@@ -319,7 +301,6 @@ function useReducedMotion() {
 
   useEffect(() => {
     const query = window.matchMedia('(prefers-reduced-motion: reduce)');
-
     const update = () => setReducedMotion(query.matches);
 
     update();
@@ -350,6 +331,61 @@ function usePageVisible() {
   return visible;
 }
 
+function ProjectThumbnail({ project, selected }) {
+  const [failedSources, setFailedSources] = useState([]);
+
+  const candidates = [
+    project.thumbnail,
+    project.images[0],
+  ].filter(Boolean);
+
+  const imageSource = candidates.find(
+    (source) => !failedSources.includes(source)
+  );
+
+  const Icon = project.type === 'UI/UX Design' ? FaFigma : FaCode;
+
+  return (
+    <span className="project-selector-thumbnail" aria-hidden="true">
+      {imageSource ? (
+        <img
+          key={imageSource}
+          className="project-selector-image"
+          src={imageSource}
+          alt=""
+          loading="lazy"
+          decoding="async"
+          style={{
+            objectPosition: project.thumbnailPosition || 'center',
+          }}
+          onError={() => {
+            setFailedSources((current) =>
+              current.includes(imageSource)
+                ? current
+                : [...current, imageSource]
+            );
+          }}
+        />
+      ) : (
+        <span className="project-thumbnail-fallback">
+          <Icon />
+          <span>{project.name}</span>
+        </span>
+      )}
+
+      <span className="project-selector-number">
+        {project.number}
+      </span>
+
+      {selected && (
+        <span className="project-thumbnail-active">
+          Selected
+        </span>
+      )}
+    </span>
+  );
+}
+
 function ProjectCover({ project }) {
   const Icon = project.type === 'UI/UX Design' ? FaFigma : FaCode;
 
@@ -358,7 +394,6 @@ function ProjectCover({ project }) {
       <span className="project-cover-icon" aria-hidden="true">
         <Icon />
       </span>
-
       <span className="project-cover-name">{project.name}</span>
       <span className="project-cover-category">{project.category}</span>
       <span className="project-cover-type">{project.type}</span>
@@ -414,9 +449,8 @@ function ProjectGallery({ project, stopped }) {
           </span>
 
           <span className="project-browser-title">{project.name}</span>
-
           <span className="project-browser-badge">
-            {hasImages ? 'PREVIEW' : project.type === 'UI/UX Design' ? 'DESIGN' : 'PROJECT'}
+            {hasImages ? 'PREVIEW' : 'PROJECT'}
           </span>
         </div>
 
@@ -476,16 +510,16 @@ export default function Projects() {
   const [paused, setPaused] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [focusWithin, setFocusWithin] = useState(false);
+  const [showcaseRequest, setShowcaseRequest] = useState(0);
+
+  const showcaseRef = useRef(null);
+  const pendingShowcaseScroll = useRef(false);
 
   const reducedMotion = useReducedMotion();
   const pageVisible = usePageVisible();
 
   const stopped =
-    paused ||
-    hovered ||
-    focusWithin ||
-    reducedMotion ||
-    !pageVisible;
+    paused || hovered || focusWithin || reducedMotion || !pageVisible;
 
   const activeProject = projectData[activeIndex];
 
@@ -498,6 +532,33 @@ export default function Projects() {
 
     return () => window.clearTimeout(timer);
   }, [activeIndex, stopped]);
+
+  /*
+    Scroll only after a thumbnail card is clicked.
+    Automatic slides and screenshot changes never trigger scrolling.
+    The request counter also handles clicking the already-selected card.
+  */
+  useEffect(() => {
+    if (!pendingShowcaseScroll.current) return;
+
+    const showcase = showcaseRef.current;
+    if (!showcase) return;
+
+    pendingShowcaseScroll.current = false;
+
+    showcase.focus({ preventScroll: true });
+    showcase.scrollIntoView({
+      behavior: reducedMotion ? 'auto' : 'smooth',
+      block: 'start',
+      inline: 'nearest',
+    });
+  }, [activeIndex, showcaseRequest, reducedMotion]);
+
+  const selectProject = (index) => {
+    pendingShowcaseScroll.current = true;
+    setActiveIndex(index);
+    setShowcaseRequest((current) => current + 1);
+  };
 
   const previousProject = () => {
     setActiveIndex(
@@ -548,10 +609,13 @@ export default function Projects() {
           }}
         >
           <div
+            id="project-showcase"
+            ref={showcaseRef}
             className="project-spotlight"
             role="region"
             aria-roledescription="carousel"
-            aria-label="Selected technical projects"
+            aria-label={`Project showcase: ${activeProject.name}`}
+            tabIndex={-1}
           >
             <div className="project-spotlight-header">
               <span className="project-header-label">
@@ -690,8 +754,8 @@ export default function Projects() {
                     onClick={() => setPaused((current) => !current)}
                     aria-label={
                       paused
-                        ? 'Enable automatic project and screenshot slideshows'
-                        : 'Pause automatic project and screenshot slideshows'
+                        ? 'Enable automatic slideshows'
+                        : 'Pause automatic slideshows'
                     }
                     aria-pressed={paused}
                   >
@@ -737,27 +801,31 @@ export default function Projects() {
                 className={`project-selector-button ${
                   index === activeIndex ? 'is-active' : ''
                 }`}
-                onClick={() => setActiveIndex(index)}
-                aria-label={`Show ${project.name}: ${project.category}`}
+                onClick={() => selectProject(index)}
+                aria-label={`Show ${project.name} in the project showcase`}
+                aria-controls="project-showcase"
                 aria-pressed={index === activeIndex}
               >
-                <span className="project-selector-number">
-                  {project.number}
-                </span>
-
-                <span className="project-selector-text">
-                  <span className="project-selector-name">
-                    {project.name}
-                  </span>
-                  <span className="project-selector-caption">
-                    {project.type}
-                  </span>
-                </span>
-
-                <FaArrowRight
-                  className="project-selector-arrow"
-                  aria-hidden="true"
+                <ProjectThumbnail
+                  key={`${project.id}-${project.thumbnail}-${project.images[0]}`}
+                  project={project}
+                  selected={index === activeIndex}
                 />
+
+                <span className="project-selector-info">
+                  <span className="project-selector-text">
+                    <span className="project-selector-name">
+                      {project.name}
+                    </span>
+                    <span className="project-selector-caption">
+                      {project.type}
+                    </span>
+                  </span>
+
+                  <span className="project-selector-arrow" aria-hidden="true">
+                    <FaArrowRight />
+                  </span>
+                </span>
               </button>
             ))}
           </div>
