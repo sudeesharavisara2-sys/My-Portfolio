@@ -7,24 +7,59 @@ import '../styles/Projects.css';
 import {
   FaArrowLeft,
   FaArrowRight,
+  FaCode,
   FaExternalLinkAlt,
+  FaFigma,
   FaGithub,
   FaImage,
   FaPause,
   FaPlay,
 } from 'react-icons/fa';
 
-const PROJECT_DURATION = 16000;
+/*
+  Add your actual URLs below.
+  Buttons appear automatically when a URL is provided.
+
+  Add screenshot paths after placing the images in:
+  client/public/projects/
+
+  Example screenshot path:
+  '/projects/your-image.png'
+*/
+const newProjectAssets = {
+  agroo: {
+    github: '',
+    liveDemo: '',
+    images: [],
+  },
+  fiveSamath: {
+    github: '',
+    images: [],
+  },
+  nsbmDays: {
+    figma: '',
+    images: [],
+  },
+};
+
+const PROJECT_DURATION = 22000;
 const SCREENSHOT_DURATION = 3500;
 
 const projectData = [
   {
+    id: 'nexaerp',
     number: '01',
     name: 'NexaERP',
     category: 'Enterprise Resource Planning',
-    title: 'NexaERP - Enterprise Resource Planning System',
+    date: 'Jul 2026',
+    type: 'Development',
     description:
-      'An 11-module enterprise resource planning system developed using React, TypeScript, Java, Spring Boot, and PostgreSQL. Contributed to backend business logic, RESTful APIs, database operations, authentication, and the HR & Payroll module.',
+      'Contributed to an 11-module ERP system, developing business functionality using Java, Spring Boot, React, and PostgreSQL.',
+    highlights: [
+      'Developed the HR & Payroll module, covering employee, leave, salary, and payroll management.',
+      'Implemented RESTful APIs, validation, database operations, JWT authentication, and role-based access control.',
+      'Collaborated on module integration, database migrations, debugging, and Git-based development.',
+    ],
     tags: [
       'Java',
       'Spring Boot',
@@ -43,41 +78,117 @@ const projectData = [
     ],
   },
   {
+    id: 'agroo',
     number: '02',
-    name: 'HirePath AI',
-    category: 'Recruitment & Talent Management',
-    title: 'HirePath AI - Recruitment & Talent Management Platform',
+    name: 'Agroo',
+    category: 'Agricultural Marketplace',
+    date: 'Aug 2026',
+    type: 'Development',
     description:
-      'A recruitment and talent management platform built with ASP.NET Core 8, React, SQL Server, and Entity Framework Core. Contributed to candidate management, RESTful APIs, frontend-backend integration, authentication, debugging, and workflow testing.',
-    tags: [
-      'ASP.NET Core',
-      'React',
-      'SQL Server',
-      'Entity Framework',
-      'REST APIs',
-      'JWT',
+      'Developed a full-stack agricultural marketplace platform using Spring Boot, React, TypeScript, and PostgreSQL.',
+    highlights: [
+      'Implemented RESTful APIs, JWT authentication, email OTP verification, and role-based access control.',
+      'Integrated real-time group messaging using WebSocket and an AI chatbot using the OpenAI API.',
+      'Implemented real-time weather information, market prices, alerts, product management, and administrative features.',
+      'Configured Azure PostgreSQL integration with environment-based database credentials.',
     ],
-    github: 'https://github.com/sudeesharavisara2-sys/HirePath.git',
-    images: [
-      '/projects/hirepath1.png',
-      '/projects/hirepath2.png',
-      '/projects/hirepath3.png',
-    ],
-  },
-  {
-    number: '03',
-    name: 'NextStep',
-    category: 'University Management',
-    title: 'NextStep - University Management Platform',
-    description:
-      'A full-stack university platform developed using React, Spring Boot, and MySQL to support university logistics, shuttle tracking, and resource management. Implemented RESTful APIs and integrated frontend, backend, and relational database components.',
     tags: [
       'Java',
       'Spring Boot',
       'React',
-      'MySQL',
-      'REST APIs',
+      'TypeScript',
+      'PostgreSQL',
+      'JWT',
+      'WebSocket',
+      'OpenAI API',
     ],
+
+    github: 'https://github.com/sudeesharavisara2-sys/AgrooWebApp-backend.git',
+    liveDemo: 'https://agroo-web-app-frontend.vercel.app/',
+    images: [
+      '/projects/agroo1.png',
+      '/projects/agroo2.png',
+      '/projects/agroo3.png',
+      '/projects/agroo4.png',
+      '/projects/agroo5.png',
+      '/projects/agroo6.png',
+      '/projects/agroo7.png',
+      '/projects/agroo8.png',
+      '/projects/agroo9.png',
+      '/projects/agroo10.png',
+      '/projects/agroo11.png',
+      '/projects/agroo12.png',
+      '/projects/agroo13.png',
+      '/projects/agroo14.png',
+      '/projects/agroo15.png',
+      '/projects/agroo16.png',
+      '/projects/agroo17.png',
+      '/projects/agroo18.png',
+  
+    ],
+
+    
+  },
+
+  {
+    id: 'fivesamath',
+    number: '03',
+    name: 'FiveSamath',
+    category: 'Grade 5 Scholarship Learning',
+    date: 'Jun 2026',
+    status: 'In Development',
+    type: 'Development',
+    description:
+      'Developing a full-stack learning platform for Sri Lankan Grade 5 Scholarship students using ASP.NET Core, React, TypeScript, and SQL Server.',
+    highlights: [
+      'Implemented JWT authentication, email OTP verification, protected routes, and role-based access for students, parents, and administrators.',
+      'Developed quizzes, mock exams, progress tracking, gamification features, multilingual support, and RESTful API integration.',
+    ],
+    tags: [
+      'ASP.NET Core',
+      'React',
+      'TypeScript',
+      'Tailwind CSS',
+      'SQL Server',
+      'JWT',
+    ],
+    github: 'https://github.com/sudeesharavisara2-sys/FiveSamath.API-Frontend.git',
+    liveDemo: 'https://fivesamath-api-frontend.sudeesharavisara2.workers.dev/',
+    
+    images: [
+      '/projects/FiveSamath1.png',
+      '/projects/FiveSamath2.png',
+      '/projects/FiveSamath3.png',
+      '/projects/FiveSamath4.png',
+      '/projects/FiveSamath5.png',
+      '/projects/FiveSamath6.png',
+      '/projects/FiveSamath7.png',
+      '/projects/FiveSamath8.png',
+      '/projects/FiveSamath9.png',
+      '/projects/FiveSamath10.png',
+      '/projects/FiveSamath11.png',
+      '/projects/FiveSamath12.png',
+      '/projects/FiveSamath13.png',
+      '/projects/FiveSamath14.png',
+    ],
+    
+  
+  },
+  {
+    id: 'nextstep',
+    number: '04',
+    name: 'NextStep',
+    category: 'University Management',
+    date: 'Jan 2026',
+    type: 'Development',
+    description:
+      'Developed a full-stack university platform for logistics, shuttle tracking, and resource management.',
+    highlights: [
+      'Built RESTful APIs and integrated a MySQL relational database with the React frontend.',
+      'Implemented backend services, relational data management, and frontend-backend integration.',
+      'Applied software architecture and Git-based collaborative development practices.',
+    ],
+    tags: ['Java', 'Spring Boot', 'React', 'MySQL', 'REST APIs'],
     github: 'https://github.com/sudeesharavisara2-sys/NextStep.git',
     images: [
       '/projects/nextstep1.png',
@@ -86,21 +197,82 @@ const projectData = [
       '/projects/nextstep4.png',
     ],
   },
+  
   {
-    number: '04',
+  id: 'nsbmdays',
+  number: '05',
+  name: 'NSBMDAYS',
+  category: 'University Digital Platform',
+  date: 'Oct 2025',
+  type: 'UI/UX Design',
+  description:
+    'Designed a university digital platform prototype integrating academic and student services using Figma.',
+  highlights: [
+    'Applied HCI principles to design user flows, information architecture, navigation, and accessible interfaces.',
+    'Conducted usability-focused design and iterated interfaces based on user needs and feedback.',
+  ],
+  tags: [
+    'Figma',
+    'HCI',
+    'UI/UX',
+    'Prototyping',
+    'Wireframing',
+    'Usability',
+  ],
+  figma:
+    'https://www.figma.com/design/2jPpx0t81FkPxJIXhMVcUJ/NSBMDAYS-UI?node-id=1-3&p=f',
+  images: [
+    '/projects/HCI1.jpg',
+    '/projects/HCI2.jpg',
+    '/projects/HCI3.jpg',
+    '/projects/HCI4.jpg',
+  ],
+},
+
+  {
+    id: 'hirepath',
+    number: '06',
+    name: 'HirePath AI',
+    category: 'Recruitment & Talent Management',
+    date: 'Jul 2026',
+    type: 'Development',
+    description:
+      'Contributed to a recruitment platform for managing candidates, skills, experience, resumes, and job searches.',
+    highlights: [
+      'Developed RESTful APIs and application functionality using ASP.NET Core 8, Entity Framework Core, and SQL Server.',
+      'Implemented API integration, validation, error handling, debugging, and workflow testing.',
+      'Applied layered architecture, Repository/Service patterns, JWT authentication, and Git.',
+    ],
+    tags: [
+      'ASP.NET Core',
+      'React',
+      'SQL Server',
+      'Entity Framework Core',
+      'JWT',
+      'REST APIs',
+    ],
+    github: 'https://github.com/sudeesharavisara2-sys/HirePath.git',
+    images: [
+      '/projects/hirepath1.png',
+      '/projects/hirepath2.png',
+      '/projects/hirepath3.png',
+    ],
+  },
+  
+  {
+    id: 'sparehublk',
+    number: '07',
     name: 'SpareHubLK',
     category: 'Automotive Parts E-Commerce',
-    title: 'SpareHubLK - Automotive Parts E-Commerce',
+    date: 'Oct 2025',
+    type: 'Development',
     description:
-      'A full-stack e-commerce platform for automotive parts developed using PHP, MySQL, HTML, CSS, and JavaScript. Implemented product management, user management, search functionality, database operations, and responsive interfaces.',
-    tags: [
-      'PHP',
-      'MySQL',
-      'JavaScript',
-      'HTML5',
-      'CSS3',
-      'E-Commerce',
+      'Developed a web-based automotive parts e-commerce application using PHP, MySQL, HTML, and CSS.',
+    highlights: [
+      'Implemented product management, user management, search functionality, and CRUD operations.',
+      'Designed relational database operations and optimized queries for efficient data retrieval.',
     ],
+    tags: ['PHP', 'MySQL', 'HTML', 'CSS', 'CRUD', 'E-Commerce'],
     github: 'https://github.com/sudeesharavisara2-sys/sparehublk.com.git',
     images: [
       '/projects/sparehub1.png',
@@ -109,18 +281,26 @@ const projectData = [
     ],
   },
   {
-    number: '05',
+    id: 'carpricelk',
+    number: '08',
     name: 'CarPriceLK',
     category: 'Vehicle Price Prediction',
-    title: 'CarPriceLK - Vehicle Price Prediction Platform',
+    date: 'Jun 2026',
+    type: 'Development',
     description:
-      'A vehicle market value prediction platform built with Python. The system collects and processes vehicle listing data, trains a Random Forest regression model, and provides price predictions through RESTful APIs with a web dashboard.',
+      'Developed a vehicle price prediction system using Python, Flask, MySQL, and machine learning.',
+    highlights: [
+      'Built web scraping and data preprocessing pipelines to collect, clean, and normalize Sri Lankan vehicle listings.',
+      'Trained a Random Forest regression model to predict vehicle prices and generate market price ranges.',
+      'Developed a Flask REST API and web dashboard with vehicle suggestions, price predictions, and market verdicts.',
+    ],
     tags: [
       'Python',
       'Flask',
-      'Machine Learning',
       'MySQL',
-      'REST API',
+      'HTML',
+      'CSS',
+      'Random Forest',
       'Web Scraping',
     ],
     github: 'https://github.com/sudeesharavisara2-sys/CarPriceLK.git',
@@ -131,6 +311,7 @@ const projectData = [
       '/projects/carpricelk4.png',
     ],
   },
+  
 ];
 
 function useReducedMotion() {
@@ -139,16 +320,12 @@ function useReducedMotion() {
   useEffect(() => {
     const query = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-    const updatePreference = () => {
-      setReducedMotion(query.matches);
-    };
+    const update = () => setReducedMotion(query.matches);
 
-    updatePreference();
-    query.addEventListener('change', updatePreference);
+    update();
+    query.addEventListener('change', update);
 
-    return () => {
-      query.removeEventListener('change', updatePreference);
-    };
+    return () => query.removeEventListener('change', update);
   }, []);
 
   return reducedMotion;
@@ -158,25 +335,41 @@ function usePageVisible() {
   const [visible, setVisible] = useState(true);
 
   useEffect(() => {
-    const updateVisibility = () => {
+    const update = () => {
       setVisible(document.visibilityState === 'visible');
     };
 
-    updateVisibility();
-    document.addEventListener('visibilitychange', updateVisibility);
+    update();
+    document.addEventListener('visibilitychange', update);
 
     return () => {
-      document.removeEventListener('visibilitychange', updateVisibility);
+      document.removeEventListener('visibilitychange', update);
     };
   }, []);
 
   return visible;
 }
 
+function ProjectCover({ project }) {
+  const Icon = project.type === 'UI/UX Design' ? FaFigma : FaCode;
+
+  return (
+    <div className="project-cover">
+      <span className="project-cover-icon" aria-hidden="true">
+        <Icon />
+      </span>
+
+      <span className="project-cover-name">{project.name}</span>
+      <span className="project-cover-category">{project.category}</span>
+      <span className="project-cover-type">{project.type}</span>
+    </div>
+  );
+}
+
 function ProjectScreenshot({ src, alt }) {
   const [failed, setFailed] = useState(false);
 
-  if (!src || failed) {
+  if (failed) {
     return (
       <div className="project-image-fallback" role="img" aria-label={alt}>
         <FaImage aria-hidden="true" />
@@ -197,16 +390,18 @@ function ProjectScreenshot({ src, alt }) {
 
 function ProjectGallery({ project, stopped }) {
   const [imageIndex, setImageIndex] = useState(0);
+  const images = project.images;
+  const hasImages = images.length > 0;
 
   useEffect(() => {
-    if (stopped || project.images.length < 2) return undefined;
+    if (stopped || images.length < 2) return undefined;
 
     const timer = window.setTimeout(() => {
-      setImageIndex((current) => (current + 1) % project.images.length);
+      setImageIndex((current) => (current + 1) % images.length);
     }, SCREENSHOT_DURATION);
 
     return () => window.clearTimeout(timer);
-  }, [imageIndex, stopped, project.images]);
+  }, [imageIndex, stopped, images]);
 
   return (
     <div className="project-gallery">
@@ -218,50 +413,59 @@ function ProjectGallery({ project, stopped }) {
             <span />
           </span>
 
-          <span className="project-browser-title">
-            {project.name}
-          </span>
+          <span className="project-browser-title">{project.name}</span>
 
           <span className="project-browser-badge">
-            PREVIEW
+            {hasImages ? 'PREVIEW' : project.type === 'UI/UX Design' ? 'DESIGN' : 'PROJECT'}
           </span>
         </div>
 
         <div className="project-image-stage">
-          <ProjectScreenshot
-            key={project.images[imageIndex]}
-            src={project.images[imageIndex]}
-            alt={`${project.name} screenshot ${imageIndex + 1}`}
-          />
+          {hasImages ? (
+            <ProjectScreenshot
+              key={images[imageIndex]}
+              src={images[imageIndex]}
+              alt={`${project.name} screenshot ${imageIndex + 1}`}
+            />
+          ) : (
+            <ProjectCover project={project} />
+          )}
         </div>
       </div>
 
-      <div className="project-gallery-footer">
-        <span className="project-image-counter">
-          Screenshot {imageIndex + 1}
-          <span> / {project.images.length}</span>
-        </span>
+      {hasImages && (
+        <div className="project-gallery-footer">
+          <span className="project-image-counter">
+            Screenshot {imageIndex + 1}
+            <span> / {images.length}</span>
+          </span>
 
-        <div
-          className="project-image-pagination"
-          role="group"
-          aria-label={`${project.name} screenshots`}
-        >
-          {project.images.map((image, index) => (
-            <button
-              key={image}
-              type="button"
-              className={`project-image-dot ${
-                imageIndex === index ? 'is-active' : ''
-              }`}
-              onClick={() => setImageIndex(index)}
-              aria-label={`Show screenshot ${index + 1} of ${project.name}`}
-              aria-pressed={imageIndex === index}
-            >
-              <span aria-hidden="true" />
-            </button>
-          ))}
+          <div
+            className="project-image-pagination"
+            role="group"
+            aria-label={`${project.name} screenshots`}
+          >
+            {images.map((image, index) => (
+              <button
+                key={image}
+                type="button"
+                className={`project-image-dot ${
+                  index === imageIndex ? 'is-active' : ''
+                }`}
+                onClick={() => setImageIndex(index)}
+                aria-label={`Show screenshot ${index + 1} of ${project.name}`}
+                aria-pressed={index === imageIndex}
+              >
+                <span aria-hidden="true" />
+              </button>
+            ))}
+          </div>
         </div>
+      )}
+
+      <div className="project-preview-meta">
+        <span>{project.type}</span>
+        <span>{project.date}</span>
       </div>
     </div>
   );
@@ -286,7 +490,7 @@ export default function Projects() {
   const activeProject = projectData[activeIndex];
 
   useEffect(() => {
-    if (stopped || projectData.length < 2) return undefined;
+    if (stopped) return undefined;
 
     const timer = window.setTimeout(() => {
       setActiveIndex((current) => (current + 1) % projectData.length);
@@ -322,12 +526,12 @@ export default function Projects() {
             </p>
 
             <h2 id="projects-title" className="projects-title">
-              Featured <span>Projects</span>
+              Selected <span>Projects</span>
             </h2>
 
             <p className="projects-subtitle">
-              A selection of applications I have built and contributed to,
-              from enterprise platforms to data-driven solutions.
+              Applications I have built and contributed to, alongside
+              interface designs focused on real user needs.
             </p>
           </div>
         </FadeIn>
@@ -347,7 +551,7 @@ export default function Projects() {
             className="project-spotlight"
             role="region"
             aria-roledescription="carousel"
-            aria-label="Featured projects"
+            aria-label="Selected technical projects"
           >
             <div className="project-spotlight-header">
               <span className="project-header-label">
@@ -365,40 +569,51 @@ export default function Projects() {
             </div>
 
             <div
+              key={activeProject.id}
               className="project-spotlight-slide"
-              key={activeProject.number}
               role="group"
               aria-roledescription="slide"
               aria-label={`${activeIndex + 1} of ${projectData.length}: ${
-                activeProject.title
+                activeProject.name
               }`}
             >
               <div className="project-preview-column">
-                <ProjectGallery
-                  project={activeProject}
-                  stopped={stopped}
-                />
+                <ProjectGallery project={activeProject} stopped={stopped} />
               </div>
 
               <div className="project-details">
-                <p className="project-category">
-                  {activeProject.category}
-                </p>
+                <div className="project-detail-heading">
+                  <p className="project-category">
+                    {activeProject.category}
+                  </p>
 
-                <h3 className="project-name">
-                  {activeProject.name}
-                </h3>
+                  {activeProject.status && (
+                    <span className="project-status">
+                      {activeProject.status}
+                    </span>
+                  )}
+                </div>
+
+                <h3 className="project-name">{activeProject.name}</h3>
 
                 <p className="project-description">
                   {activeProject.description}
                 </p>
 
+                <ul className="project-highlights">
+                  {activeProject.highlights.map((highlight) => (
+                    <li key={highlight}>{highlight}</li>
+                  ))}
+                </ul>
+
                 <div className="project-stack">
                   <p className="project-stack-label">
-                    TECHNOLOGIES
+                    {activeProject.type === 'UI/UX Design'
+                      ? 'TOOLS & METHODS'
+                      : 'TECHNOLOGIES'}
                   </p>
 
-                  <ul className="project-tags" aria-label="Technologies">
+                  <ul className="project-tags">
                     {activeProject.tags.map((tag) => (
                       <li className="project-tag" key={tag}>
                         {tag}
@@ -407,33 +622,51 @@ export default function Projects() {
                   </ul>
                 </div>
 
-                <div className="project-links">
-                  {activeProject.liveDemo && (
-                    <a
-                      className="project-link project-link-primary"
-                      href={activeProject.liveDemo}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Open ${activeProject.name} live demo in a new tab`}
-                    >
-                      <span>Live Demo</span>
-                      <FaExternalLinkAlt aria-hidden="true" />
-                    </a>
-                  )}
+                {(activeProject.liveDemo ||
+                  activeProject.github ||
+                  activeProject.figma) && (
+                  <div className="project-links">
+                    {activeProject.liveDemo && (
+                      <a
+                        className="project-link project-link-primary"
+                        href={activeProject.liveDemo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Open ${activeProject.name} live demo in a new tab`}
+                      >
+                        <span>Live Demo</span>
+                        <FaExternalLinkAlt aria-hidden="true" />
+                      </a>
+                    )}
 
-                  {activeProject.github && (
-                    <a
-                      className="project-link project-link-secondary"
-                      href={activeProject.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`View ${activeProject.name} on GitHub in a new tab`}
-                    >
-                      <FaGithub aria-hidden="true" />
-                      <span>View GitHub</span>
-                    </a>
-                  )}
-                </div>
+                    {activeProject.github && (
+                      <a
+                        className="project-link project-link-secondary"
+                        href={activeProject.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`View ${activeProject.name} on GitHub in a new tab`}
+                      >
+                        <FaGithub aria-hidden="true" />
+                        <span>View GitHub</span>
+                      </a>
+                    )}
+
+                    {activeProject.figma && (
+                      <a
+                        className="project-link project-link-primary"
+                        href={activeProject.figma}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`View ${activeProject.name} in Figma in a new tab`}
+                      >
+                        <FaFigma aria-hidden="true" />
+                        <span>View Figma</span>
+                        <FaExternalLinkAlt aria-hidden="true" />
+                      </a>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
 
@@ -441,7 +674,7 @@ export default function Projects() {
               <div className="project-position" aria-hidden="true">
                 {projectData.map((project, index) => (
                   <span
-                    key={project.number}
+                    key={project.id}
                     className={`project-position-dot ${
                       index === activeIndex ? 'is-active' : ''
                     }`}
@@ -467,7 +700,6 @@ export default function Projects() {
                     ) : (
                       <FaPause aria-hidden="true" />
                     )}
-
                     <span>{paused ? 'Resume' : 'Pause'}</span>
                   </button>
                 )}
@@ -500,13 +732,13 @@ export default function Projects() {
           >
             {projectData.map((project, index) => (
               <button
+                key={project.id}
                 type="button"
-                key={project.number}
                 className={`project-selector-button ${
                   index === activeIndex ? 'is-active' : ''
                 }`}
                 onClick={() => setActiveIndex(index)}
-                aria-label={`Show ${project.title}`}
+                aria-label={`Show ${project.name}: ${project.category}`}
                 aria-pressed={index === activeIndex}
               >
                 <span className="project-selector-number">
@@ -517,9 +749,8 @@ export default function Projects() {
                   <span className="project-selector-name">
                     {project.name}
                   </span>
-
                   <span className="project-selector-caption">
-                    View project
+                    {project.type}
                   </span>
                 </span>
 
